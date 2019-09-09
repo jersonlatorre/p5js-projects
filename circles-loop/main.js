@@ -2,7 +2,7 @@ let t = 0
 let color = 0
 
 function setup() {
-	createCanvas(600, 600)
+	createCanvas(500, 500)
 }
 
 function draw() {

@@ -1,4 +1,4 @@
-let W = 35
+let W = 50
 
 coloredPositions = [
   [W, 0],

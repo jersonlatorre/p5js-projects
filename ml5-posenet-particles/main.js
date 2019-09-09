@@ -7,7 +7,7 @@ let ps1 = new ParticleSystem()
 let ps2 = new ParticleSystem()
 
 function setup() {
-	createCanvas(640, 480)
+	createCanvas(640, 450)
 
 	video = createVideo('assets/video.mp4')
 	// video = createCapture(VIDEO)
