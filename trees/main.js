@@ -34,17 +34,20 @@ function CreateBranch (sx, sy, ex, ey, sl, sd) {
 	var prevy = starty;
 	var next_flag = true;
 	var draw_flag = true;
+	
 	this.update = function () {
 		nextx += (endx - nextx) * 0.4;
 		nexty += (endy - nexty) * 0.4;
 		s_color = int (count / 10.0);
 		s_weight = 3.0 / (count / 100 + 1);
+
 		if (abs (nextx - endx) < 1.0 && abs (nexty - endy) < 1.0 && next_flag == true) {
 			next_flag = false;
 			draw_flag = false;
 			nextx = endx;
 			nexty = endy;
 			var num = int (random (2, 4));
+
 			for (var i = 0; i < num; i++) {
 				var sx = endx;
 				var sy = endy;
@@ -54,8 +57,10 @@ function CreateBranch (sx, sy, ex, ey, sl, sd) {
 				var ey = sy + sl * sin (radians (sd + degree + offset));
 				branch.push (new CreateBranch (sx, sy, ex, ey, sl, sd + degree));
 			}
+			
 			count += 1;
 		}
+
 		if (branch.length > 6000) {
 			count = 0;
 			s_color = 0;
@@ -66,12 +71,14 @@ function CreateBranch (sx, sy, ex, ey, sl, sd) {
 			branch.push (new CreateBranch (sx, height, sx, height - sl, sl, 0.0));
 		}
 	}
+
 	this.render = function () {
 		if (draw_flag == true) {
 			stroke (s_color);
 			strokeWeight (s_weight);
 			line (prevx, prevy, nextx, nexty);
 		}
+
 		prevx = nextx;
 		prevy = nexty;
 	}
