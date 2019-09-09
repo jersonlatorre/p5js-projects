@@ -10,7 +10,7 @@ let frame
 function setup() {
 	createCanvas(800, 800)
 	frameRate(60)
-	video = createVideo('videos/pexels.mp4')
+	video = createVideo('assets/pexels.mp4')
 	video.size(width, height)
 	video.hide()
 

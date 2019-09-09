@@ -9,7 +9,7 @@ let ps2 = new ParticleSystem()
 function setup() {
 	createCanvas(640, 480)
 
-	video = createVideo('videos/video.mp4')
+	video = createVideo('assets/video.mp4')
 	// video = createCapture(VIDEO)
 	video.size(width, height)
 	video.hide()
