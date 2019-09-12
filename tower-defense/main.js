@@ -32,7 +32,7 @@ let explosions = []
 let timer = 0
 
 function setup() {
-	createCanvas(640, 640)
+	createCanvas(500, 500)
 	towerPositions.forEach((p) => {
 		let tower = new Tower(p.x, p.y)
 		towers.push(tower)
