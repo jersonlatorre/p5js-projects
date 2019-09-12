@@ -29,10 +29,11 @@ let paths = [
 let npcs = []
 let towers = []
 let explosions = []
+let waves = []
 let timer = 0
 
 function setup() {
-	createCanvas(500, 500)
+	createCanvas(640, 640)
 	towerPositions.forEach((p) => {
 		let tower = new Tower(p.x, p.y)
 		towers.push(tower)
@@ -51,10 +52,11 @@ function draw() {
 	drawNpcs()
 	drawTowers()
 	drawExplosions()
+	drawWaves()
 
 	timer += deltaTime / 1000
 
-	if (timer >= random(0.8, 1.2)) {
+	if (timer >= random(0.8, 1.8)) {
 		timer = 0
 		spawnNpc()
 	}
@@ -94,6 +96,16 @@ function drawPaths() {
 				strokeWeight(45)
 				line(p1.x, p1.y, p2.x, p2.y)
 			}
+		}
+	})
+}
+
+function drawWaves() {
+	waves.forEach((wave, i) => {
+		wave.draw()
+
+		if (wave.isDead) {
+			waves.splice(i, 1)
 		}
 	})
 }

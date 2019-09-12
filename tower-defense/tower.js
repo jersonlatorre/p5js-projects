@@ -27,7 +27,7 @@ class Tower {
 
 		if (minIndex != -1) {
 			nearest = npcs[minIndex].position
-			if (this.t % 10 == 0) {
+			if (this.t % 8 == 0) {
 				npcs[minIndex].hit()
 				stroke('gray')
 				strokeWeight(3)
