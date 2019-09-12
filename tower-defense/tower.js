@@ -1,8 +1,10 @@
 class Tower {
+	radius = 250
+	t = 0
+	bullets = []
+
 	constructor(x, y) {
 		this.position = new p5.Vector(x, y)
-		this.radius = 250
-		this.t = 0
 	}
 
 	draw() {
@@ -14,7 +16,7 @@ class Tower {
 
 		let minDist = 9999999999
 		let minIndex = -1
-		npcs.forEach((npc, i) => {
+		Game.npcs.forEach((npc, i) => {
 			let d = p5.Vector.dist(npc.position, this.position)
 
 			if (d < this.radius / 2 && d < minDist) {
@@ -23,22 +25,23 @@ class Tower {
 			}
 		})
 
-		let nearest
-
 		if (minIndex != -1) {
-			nearest = npcs[minIndex].position
-			if (this.t % 8 == 0) {
-				npcs[minIndex].hit()
-				stroke('gray')
-				strokeWeight(3)
-				line(
-					nearest.x,
-					nearest.y,
+			if (this.t % 15 == 0) {
+				let bullet = new Bullet(
 					this.position.x,
-					this.position.y
+					this.position.y,
+					Game.npcs[minIndex]
 				)
+				this.bullets.push(bullet)
 			}
 		}
+
+		this.bullets.forEach((bullet, i) => {
+			bullet.draw()
+			if (bullet.isDead) {
+				this.bullets.splice(i, 1)
+			}
+		})
 
 		this.t += 1
 	}

@@ -1,26 +1,24 @@
 class Npc {
+	position = new p5.Vector(0, 0)
+	speed = 0.7
+	maxhp = 100
+	minSize = 5
+	maxSize = 15
+	isDead = false
+	index = 0
+	t = 0
+	size = 0
+	state = 'APPEARING'
+	hp = this.maxhp
+
 	constructor(path) {
-		this.position = new p5.Vector(0, 0)
 		this.path = path
-
-		this.speed = 0.7
-		this.maxhp = 100
-		this.minSize = 5
-		this.maxSize = 15
-		this.isDead = false
-
-		this.hp = this.maxhp
-		this.index = 0
-		this.t = 0
-		this.size = 0
-
-		this.state = 'APPEARING'
 	}
 
 	draw() {
 		switch (this.state) {
 			case 'APPEARING':
-				let p = waypoints[this.path[this.index]]
+				let p = Game.waypoints[this.path[this.index]]
 				push()
 				translate(p.x, p.y)
 				fill('rgb(220, 80, 0)')
@@ -33,13 +31,14 @@ class Npc {
 				this.size += 0.7
 				if (this.size >= this.maxSize) {
 					this.size = this.maxSize
-					this.state = "MOVING"
+					this.state = 'MOVING'
 				}
+
 				break
 
 			case 'MOVING':
-				let p1 = waypoints[this.path[this.index]]
-				let p2 = waypoints[this.path[this.index + 1]]
+				let p1 = Game.waypoints[this.path[this.index]]
+				let p2 = Game.waypoints[this.path[this.index + 1]]
 				this.position = p5.Vector.lerp(p1, p2, this.t)
 
 				this.t += this.speed * deltaTime / 1000
@@ -59,6 +58,7 @@ class Npc {
 				fill('rgb(100, 255, 0)')
 				rect(-6, -14, 12 * this.hp / this.maxhp, 3)
 				pop()
+
 				break
 		}
 	}
@@ -72,7 +72,7 @@ class Npc {
 	}
 
 	hit() {
-		this.hp -= 10
+		this.hp -= 20
 
 		if (this.hp <= 0) {
 			this.die()
@@ -98,13 +98,13 @@ class Npc {
 			this.position.y
 		)
 
-		explosions.push(explosion)
+		Game.effects.push(explosion)
 	}
 
 	win() {
-		let endPoint = waypoints[this.path[this.index]]
+		let endPoint = Game.waypoints[this.path[this.index]]
 		this.isDead = true
 		let wave = new Wave(endPoint.x, endPoint.y)
-		waves.push(wave)
+		Game.effects.push(wave)
 	}
 }
