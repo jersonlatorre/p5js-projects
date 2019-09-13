@@ -10,6 +10,11 @@ class Explosion {
 			let particle = new Particle(this.x, this.y)
 			this.particles.push(particle)
 		}
+
+		Game.isShaking = true
+		setTimeout(() => {
+			Game.isShaking = false
+		}, Game.shakeDuration)
 	}
 
 	draw() {
@@ -30,7 +35,7 @@ class Particle {
 	velocity = p5.Vector.random2D().mult(random(0.5, 3))
 	size = 10
 	isDead = false
-	
+
 	constructor(x, y) {
 		this.position = new p5.Vector(x, y)
 	}

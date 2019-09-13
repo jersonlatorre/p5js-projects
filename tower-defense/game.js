@@ -29,8 +29,12 @@ class Game {
 
 	towers = []
 	timer = 0
+	static shakeAmplitude = 15
+	static shakeFrequency = 10
+	static shakeDuration = 100
 	static npcs = []
 	static effects = []
+	static isShaking = false
 
 	constructor() {
 		this.towerPositions.forEach((p) => {
@@ -42,6 +46,21 @@ class Game {
 	}
 
 	draw() {
+		clear()
+		background('rgba(0, 0, 0, 0.12)')
+
+		push()
+		if (Game.isShaking) {
+			translate(
+				-Game.shakeAmplitude / 2 +
+					Game.shakeAmplitude *
+						noise(millis() / Game.shakeFrequency),
+				-Game.shakeAmplitude / 2 +
+					Game.shakeAmplitude *
+						noise(millis() / Game.shakeFrequency + 10)
+			)
+		}
+
 		this.drawPaths()
 		this.drawPoints()
 		this.drawNpcs()
@@ -54,6 +73,7 @@ class Game {
 			this.timer = 0
 			this.spawnNpc()
 		}
+		pop()
 	}
 
 	drawEffects() {
@@ -64,15 +84,19 @@ class Game {
 			}
 		})
 	}
-	
+
 	drawPoints() {
 		Game.waypoints.forEach((p, i) => {
 			noStroke()
 			fill('rgba(0, 0, 0, 0.1)')
 			circle(p.x, p.y, 4)
 		})
+
+		let p = Game.waypoints[0]
+		fill('rgba(0, 0, 0, 0.07)')
+		circle(p.x, p.y, 25)
 	}
-	
+
 	drawPaths() {
 		this.paths.forEach((path) => {
 			for (let i = 0; i < path.length; i++) {
@@ -81,7 +105,7 @@ class Game {
 					noStroke()
 					fill('rgb(230, 230, 230)')
 					circle(p.x, p.y, 60)
-					fill('rgba(230, 230, 0, 0.5)')
+					fill('rgba(250, 200, 0, 0.5)')
 					circle(p.x, p.y, 30)
 				} else {
 					let p1 = Game.waypoints[path[i]]
@@ -93,7 +117,7 @@ class Game {
 			}
 		})
 	}
-	
+
 	drawNpcs() {
 		Game.npcs.forEach((npc, i) => {
 			npc.draw()
@@ -102,12 +126,12 @@ class Game {
 			}
 		})
 	}
-	
+
 	spawnNpc() {
 		let npc = new Npc(this.paths[parseInt(random(0, 3))])
 		Game.npcs.push(npc)
 	}
-	
+
 	drawTowers() {
 		this.towers.forEach((tower) => {
 			tower.draw()

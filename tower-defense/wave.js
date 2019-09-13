@@ -10,11 +10,11 @@ class Wave {
 		noFill()
 		let opacity = map(this.radius, 5, 50, 1, 0)
 		stroke('rgba(255, 150, 0, ' + opacity + ')')
-		strokeWeight(5)
+		strokeWeight(10)
 		circle(this.position.x, this.position.y, this.radius)
 
 		this.radius += 3
-		if (this.radius > 50) {
+		if (this.radius > 45) {
 			this.isDead = true
 		}
 	}

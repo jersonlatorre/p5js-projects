@@ -7,6 +7,7 @@ class Npc {
 	isDead = false
 	index = 0
 	t = 0
+	tAppear = 0
 	size = 0
 	state = 'APPEARING'
 	hp = this.maxhp
@@ -28,10 +29,11 @@ class Npc {
 				circle(0, 0, this.size / 2)
 				pop()
 
-				this.size += 0.7
-				if (this.size >= this.maxSize) {
-					this.size = this.maxSize
+				this.size = this.maxSize * this.easing(this.tAppear)
+				this.tAppear += 0.05
+				if (this.tAppear >= 1) {
 					this.state = 'MOVING'
+					this.tAppear = 0
 				}
 
 				break
@@ -52,6 +54,7 @@ class Npc {
 				fill('rgba(0, 0, 0, 0.2)')
 				circle(0, 0, this.size / 2)
 
+				rectMode(CORNER)
 				noStroke()
 				fill('rgba(0, 0, 0, 0.5)')
 				rect(-7, -15, 14, 5)
@@ -61,6 +64,10 @@ class Npc {
 
 				break
 		}
+	}
+
+	easing(t) {
+		return 4.3 * t - 3.3 * t * t
 	}
 
 	next() {

@@ -7,8 +7,5 @@ function setup() {
 
 function draw() {
 	scale(width / 500)
-	clear()
-	background('rgba(0, 0, 0, 0.15)')
-
 	game.draw()
 }

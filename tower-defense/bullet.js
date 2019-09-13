@@ -4,7 +4,7 @@ class Bullet {
 	desired
 	steer
 	maxForce = 3
-	maxSteer = .3
+	maxSteer = .5
 	target
 	isDead = false
 
@@ -22,9 +22,11 @@ class Bullet {
 			.sub(this.target.position, this.position)
 			.normalize()
 			.mult(this.maxForce)
+
 		this.steer = p5.Vector
 			.sub(this.desired, this.velocity)
 			.limit(this.maxSteer)
+
 		this.velocity.add(this.steer)
 		this.position.add(this.velocity)
 
@@ -37,7 +39,7 @@ class Bullet {
 					this.target.position.y,
 					this.position.x,
 					this.position.y
-				) < 10
+				) < 5
 			) {
 				this.isDead = true
 				this.target.hit()
@@ -45,6 +47,14 @@ class Bullet {
 		}
 
 		fill('black')
-		circle(this.position.x, this.position.y, 6)
+		rectMode(CENTER)
+		// circle(this.position.x, this.position.y, 6)
+		let angle = atan2(this.velocity.y, this.velocity.x)
+
+		push()
+		translate(this.position.x, this.position.y)
+		rotate(angle)
+		rect(0, 0, 6, 4)
+		pop()
 	}
 }
