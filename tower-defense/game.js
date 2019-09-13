@@ -29,9 +29,7 @@ class Game {
 
 	towers = []
 	timer = 0
-	static shakeAmplitude = 15
-	static shakeFrequency = 10
-	static shakeDuration = 100
+	
 	static npcs = []
 	static effects = []
 	static isShaking = false
@@ -52,12 +50,12 @@ class Game {
 		push()
 		if (Game.isShaking) {
 			translate(
-				-Game.shakeAmplitude / 2 +
-					Game.shakeAmplitude *
-						noise(millis() / Game.shakeFrequency),
-				-Game.shakeAmplitude / 2 +
-					Game.shakeAmplitude *
-						noise(millis() / Game.shakeFrequency + 10)
+				-Global.shakeAmplitude / 2 +
+					Global.shakeAmplitude *
+						noise(millis() / Global.shakeFrequency),
+				-Global.shakeAmplitude / 2 +
+					Global.shakeAmplitude *
+						noise(millis() / Global.shakeFrequency + 10)
 			)
 		}
 

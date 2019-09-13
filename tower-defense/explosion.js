@@ -1,12 +1,13 @@
 class Explosion {
 	particles = []
+	numParticles = 25
 	isDead = false
 
 	constructor(x, y) {
 		this.x = x
 		this.y = y
 
-		for (let i = 0; i < 15; i++) {
+		for (let i = 0; i < this.numParticles; i++) {
 			let particle = new Particle(this.x, this.y)
 			this.particles.push(particle)
 		}
@@ -14,7 +15,7 @@ class Explosion {
 		Game.isShaking = true
 		setTimeout(() => {
 			Game.isShaking = false
-		}, Game.shakeDuration)
+		}, Global.shakeDuration)
 	}
 
 	draw() {
@@ -32,8 +33,9 @@ class Explosion {
 }
 
 class Particle {
-	velocity = p5.Vector.random2D().mult(random(0.5, 3))
-	size = 10
+	velocity = p5.Vector.random2D().mult(random(0.5, 4))
+	maxSize = 4
+	size = this.maxSize
 	isDead = false
 
 	constructor(x, y) {
@@ -41,7 +43,7 @@ class Particle {
 	}
 
 	draw() {
-		this.size--
+		this.size -= 0.1
 
 		if (this.size < 0) {
 			this.size = 0
@@ -49,8 +51,9 @@ class Particle {
 		}
 
 		this.position.add(this.velocity)
-		let opacity = map(this.size, 0, 10, 0, 1)
-		fill('rgba(180, 180, 180,' + opacity + ')')
+		this.velocity.mult(0.93)
+		let opacity = map(this.size, 0, this.maxSize, 0, 1)
+		fill('rgba(160, 160, 160,' + opacity + ')')
 		noStroke()
 		circle(this.position.x, this.position.y, this.size)
 	}

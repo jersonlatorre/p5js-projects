@@ -1,12 +1,12 @@
 class Bullet {
 	position
-	velocity = new p5.Vector(0, 0)
+	velocity
 	desired
 	steer
-	maxForce = 3
-	maxSteer = .5
-	target
 	isDead = false
+	maxForce = 3
+	maxSteer = 0.5
+	target
 
 	constructor(x, y, target) {
 		this.position = new p5.Vector(x, y)
@@ -33,14 +33,7 @@ class Bullet {
 		if (this.target.isDead) {
 			this.isDead = true
 		} else {
-			if (
-				dist(
-					this.target.position.x,
-					this.target.position.y,
-					this.position.x,
-					this.position.y
-				) < 5
-			) {
+			if (this.target.position.dist(this.position) < 5) {
 				this.isDead = true
 				this.target.hit()
 			}

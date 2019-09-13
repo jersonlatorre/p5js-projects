@@ -1,7 +1,7 @@
 class Npc {
 	position = new p5.Vector(0, 0)
-	speed = 0.7
-	maxhp = 100
+	speed
+	maxHp = 100
 	minSize = 5
 	maxSize = 15
 	isDead = false
@@ -10,10 +10,11 @@ class Npc {
 	tAppear = 0
 	size = 0
 	state = 'APPEARING'
-	hp = this.maxhp
+	hp = this.maxHp
 
 	constructor(path) {
 		this.path = path
+		this.speed = Global.npcSpeed
 	}
 
 	draw() {
@@ -30,7 +31,7 @@ class Npc {
 				pop()
 
 				this.size = this.maxSize * this.easing(this.tAppear)
-				this.tAppear += 0.05
+				this.tAppear += 0.06
 				if (this.tAppear >= 1) {
 					this.state = 'MOVING'
 					this.tAppear = 0
@@ -57,9 +58,9 @@ class Npc {
 				rectMode(CORNER)
 				noStroke()
 				fill('rgba(0, 0, 0, 0.5)')
-				rect(-7, -15, 14, 5)
+				rect(-7, -16, 14, 4)
 				fill('rgb(100, 255, 0)')
-				rect(-6, -14, 12 * this.hp / this.maxhp, 3)
+				rect(-6, -15, 12 * this.hp / this.maxHp, 2)
 				pop()
 
 				break
@@ -67,7 +68,7 @@ class Npc {
 	}
 
 	easing(t) {
-		return 4.3 * t - 3.3 * t * t
+		return 5 * t - 4 * t * t
 	}
 
 	next() {
@@ -88,7 +89,7 @@ class Npc {
 		this.size = map(
 			this.hp,
 			0,
-			this.maxhp,
+			this.maxHp,
 			this.minSize,
 			this.maxSize
 		)

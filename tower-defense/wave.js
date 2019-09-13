@@ -1,5 +1,6 @@
 class Wave {
 	radius = 5
+	speed = 5
 	isDead = false
 
 	constructor(x, y) {
@@ -13,8 +14,9 @@ class Wave {
 		strokeWeight(10)
 		circle(this.position.x, this.position.y, this.radius)
 
-		this.radius += 3
-		if (this.radius > 45) {
+		this.radius += this.speed
+		this.speed *= 0.93
+		if (this.radius > 50) {
 			this.isDead = true
 		}
 	}

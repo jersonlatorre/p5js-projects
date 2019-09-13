@@ -1,5 +1,5 @@
 class Tower {
-	radius = 250
+	radiusAttack = 250
 	t = 0
 	bullets = []
 
@@ -8,18 +8,12 @@ class Tower {
 	}
 
 	draw() {
-		noStroke()
-		fill('green')
-		circle(this.position.x, this.position.y, 20)
-		fill('rgba(0, 0, 0, 0.2)')
-		circle(this.position.x, this.position.y, 10)
-
 		let minDist = 9999999999
 		let minIndex = -1
 		Game.npcs.forEach((npc, i) => {
 			let d = p5.Vector.dist(npc.position, this.position)
 
-			if (d < this.radius / 2 && d < minDist) {
+			if (d < this.radiusAttack / 2 && d < minDist) {
 				minDist = d
 				minIndex = i
 			}
@@ -44,5 +38,11 @@ class Tower {
 		})
 
 		this.t += 1
+
+		noStroke()
+		fill('rgba(100, 180, 0, 1)')
+		circle(this.position.x, this.position.y, 20)
+		fill('rgba(0, 0, 0, 0.2)')
+		circle(this.position.x, this.position.y, 10)
 	}
 }
