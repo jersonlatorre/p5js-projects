@@ -59,10 +59,11 @@ class Game {
 			)
 		}
 
+		
 		this.drawPaths()
 		this.drawPoints()
-		this.drawNpcs()
 		this.drawTowers()
+		this.drawNpcs()
 		this.drawEffects()
 
 		this.timer += deltaTime / 1000

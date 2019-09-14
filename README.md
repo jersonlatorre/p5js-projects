@@ -1,3 +1,4 @@
 # My p5js Experiments
 
-To see all of the examples, please visit: [p5demos.surge.sh](http://p5demos.surge.sh)
+You can see all the experiments [here](https://jersonlatorre.github.io/p5js-experiments/).
+
