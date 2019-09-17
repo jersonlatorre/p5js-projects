@@ -10,23 +10,12 @@ class Bullet {
 
 	constructor(x, y, target) {
 		this.position = new p5.Vector(x, y)
-		this.velocity = p5.Vector
-			.sub(target.position, this.position)
-			.normalize()
-			.mult(5)
+		this.velocity = p5.Vector.sub(target.position, this.position).normalize().mult(5)
 		this.target = target
 	}
 
 	draw() {
-		this.desired = p5.Vector
-			.sub(this.target.position, this.position)
-			.normalize()
-			.mult(this.maxForce)
-
-		this.steer = p5.Vector
-			.sub(this.desired, this.velocity)
-			.limit(this.maxSteer)
-
+		this.steer = SteeringBehaviours.seek(this, this.target.position)
 		this.velocity.add(this.steer)
 		this.position.add(this.velocity)
 
@@ -41,12 +30,12 @@ class Bullet {
 
 		fill('black')
 		rectMode(CENTER)
-		// circle(this.position.x, this.position.y, 6)
-		let angle = atan2(this.velocity.y, this.velocity.x)
 
 		push()
 		translate(this.position.x, this.position.y)
+		let angle = atan2(this.velocity.y, this.velocity.x)
 		rotate(angle)
+		noStroke()
 		rect(0, 0, 6, 4)
 		pop()
 	}
