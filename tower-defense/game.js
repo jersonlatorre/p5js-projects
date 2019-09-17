@@ -15,21 +15,13 @@ class Game {
 		new p5.Vector(200, 400)
 	]
 
-	towerPositions = [
-		new p5.Vector(200, 300),
-		new p5.Vector(400, 100),
-		new p5.Vector(400, 400)
-	]
+	towerPositions = [ new p5.Vector(200, 300), new p5.Vector(400, 100), new p5.Vector(400, 400) ]
 
-	paths = [
-		[ 0, 1, 2, 3, 4 ],
-		[ 0, 5, 6, 7, 8 ],
-		[ 0, 9, 10, 11, 12 ]
-	]
+	paths = [ [ 0, 1, 2, 3, 4 ], [ 0, 5, 6, 7, 8 ], [ 0, 9, 10, 11, 12 ] ]
 
 	towers = []
 	timer = 0
-	
+
 	static npcs = []
 	static effects = []
 	static isShaking = false
@@ -50,16 +42,11 @@ class Game {
 		push()
 		if (Game.isShaking) {
 			translate(
-				-Global.shakeAmplitude / 2 +
-					Global.shakeAmplitude *
-						noise(millis() / Global.shakeFrequency),
-				-Global.shakeAmplitude / 2 +
-					Global.shakeAmplitude *
-						noise(millis() / Global.shakeFrequency + 10)
+				-Global.shakeAmplitude / 2 + Global.shakeAmplitude * noise(millis() / Global.shakeFrequency),
+				-Global.shakeAmplitude / 2 + Global.shakeAmplitude * noise(millis() / Global.shakeFrequency + 10)
 			)
 		}
 
-		
 		this.drawPaths()
 		this.drawPoints()
 		this.drawTowers()
