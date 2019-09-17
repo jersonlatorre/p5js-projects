@@ -86,13 +86,7 @@ class Npc {
 			this.die()
 		}
 
-		this.size = map(
-			this.hp,
-			0,
-			this.maxHp,
-			this.minSize,
-			this.maxSize
-		)
+		this.size = map(this.hp, 0, this.maxHp, this.minSize, this.maxSize)
 
 		fill('yellow')
 		noStroke()
@@ -101,10 +95,7 @@ class Npc {
 
 	die() {
 		this.isDead = true
-		let explosion = new Explosion(
-			this.position.x,
-			this.position.y
-		)
+		let explosion = new Explosion(this.position.x, this.position.y)
 
 		Game.effects.push(explosion)
 	}
