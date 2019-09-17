@@ -40,6 +40,7 @@ class Game {
 		background('rgba(0, 0, 0, 0.12)')
 
 		push()
+
 		if (Game.isShaking) {
 			translate(
 				-Global.shakeAmplitude / 2 + Global.shakeAmplitude * noise(millis() / Global.shakeFrequency),
@@ -53,12 +54,13 @@ class Game {
 		this.drawNpcs()
 		this.drawEffects()
 
-		this.timer += deltaTime / 1000
+		this.timer += 0.02
 
-		if (this.timer >= random(0.8, 1.8)) {
+		if (this.timer >= 0.95) {
 			this.timer = 0
 			this.spawnNpc()
 		}
+
 		pop()
 	}
 
