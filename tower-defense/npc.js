@@ -1,15 +1,21 @@
 class Npc {
 	position = new p5.Vector(0, 0)
+	velocity = new p5.Vector(0, 0)
+	steer = new p5.Vector(0, 0)
+	maxForce = 1.5
+	maxSteer = 0.08
+
 	speed
 	maxHp = 100
 	minSize = 5
-	maxSize = 15
+	maxSize = 18
 	isDead = false
 	index = 0
 	t = 0
 	tAppear = 0
 	size = 0
-	state = 'APPEARING'
+	State = { APPEARING: 0, MOVING: 1, DEAD: 2 }
+	state = this.State.APPEARING
 	hp = this.maxHp
 
 	constructor(path) {
@@ -19,7 +25,7 @@ class Npc {
 
 	draw() {
 		switch (this.state) {
-			case 'APPEARING':
+			case this.State.APPEARING: {
 				let p = Game.waypoints[this.path[this.index]]
 				push()
 				translate(p.x, p.y)
@@ -31,21 +37,37 @@ class Npc {
 				pop()
 
 				this.size = this.maxSize * this.easing(this.tAppear)
-				this.tAppear += 0.06
+				this.tAppear += 0.03
 				if (this.tAppear >= 1) {
-					this.state = 'MOVING'
+					this.size = this.maxSize
+					this.state = this.State.MOVING
 					this.tAppear = 0
+					this.position = new p5.Vector(p.x, p.y)
 				}
 
 				break
+			}
 
-			case 'MOVING':
-				let p1 = Game.waypoints[this.path[this.index]]
-				let p2 = Game.waypoints[this.path[this.index + 1]]
-				this.position = p5.Vector.lerp(p1, p2, this.t)
+			case this.State.MOVING: {
+				// usando steering behaviours
+				let p = Game.waypoints[this.path[this.index]]
+				let pos = new p5.Vector(p.x, p.y)
+				this.velocity.add(SteeringBehaviours.seek(this, pos))
+				this.position.add(this.velocity)
+				if (p5.Vector.dist(p, this.position) < 10) {
+					this.index++
+					if (this.index > this.path.length - 1) {
+						this.state = this.State.DEAD
+						this.win()
+					}
+				}
 
-				this.t += this.speed * deltaTime / 1000
-				if (this.t >= 1) this.next()
+				// usando LERP
+				// let p1 = Game.waypoints[this.path[this.index]]
+				// let p2 = Game.waypoints[this.path[this.index + 1]]
+				// this.position = p5.Vector.lerp(p1, p2, this.t)
+				// this.t += this.speed * 0.02
+				// if (this.t >= 1) this.next()
 
 				push()
 				translate(this.position.x, this.position.y)
@@ -64,11 +86,12 @@ class Npc {
 				pop()
 
 				break
+			}
 		}
 	}
 
 	easing(t) {
-		return 5 * t - 4 * t * t
+		return 4 * t - 3 * t * t
 	}
 
 	next() {
@@ -101,7 +124,7 @@ class Npc {
 	}
 
 	win() {
-		let endPoint = Game.waypoints[this.path[this.index]]
+		let endPoint = Game.waypoints[this.path[this.path.length - 1]]
 		this.isDead = true
 		let wave = new Wave(endPoint.x, endPoint.y)
 		Game.effects.push(wave)
