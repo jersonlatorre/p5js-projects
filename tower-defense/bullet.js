@@ -1,22 +1,17 @@
 class Bullet {
-	position
-	velocity
-	desired
-	steer
-	isDead = false
-	maxForce = 3
-	maxSteer = 0.5
-	target
-
 	constructor(x, y, target) {
+		this.target = target
 		this.position = new p5.Vector(x, y)
 		this.velocity = p5.Vector.sub(target.position, this.position).normalize().mult(5)
-		this.target = target
+		this.isDead = false
+
+		this.maxForce = 3
+		this.maxSteer = 0.5
 	}
 
 	draw() {
-		this.steer = SteeringBehaviours.seek(this, this.target.position)
-		this.velocity.add(this.steer)
+		let steer = SteeringBehaviours.seek(this, this.target.position)
+		this.velocity.add(steer)
 		this.position.add(this.velocity)
 
 		if (this.target.isDead) {

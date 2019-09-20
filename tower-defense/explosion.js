@@ -1,11 +1,11 @@
 class Explosion {
-	particles = []
-	numParticles = 25
-	isDead = false
-
 	constructor(x, y) {
 		this.x = x
 		this.y = y
+
+		this.particles = []
+		this.numParticles = 25
+		this.isDead = false
 
 		for (let i = 0; i < this.numParticles; i++) {
 			let particle = new Particle(this.x, this.y)
@@ -33,13 +33,11 @@ class Explosion {
 }
 
 class Particle {
-	velocity = p5.Vector.random2D().mult(random(0.5, 4))
-	maxSize = 4
-	size = this.maxSize
-	isDead = false
-
 	constructor(x, y) {
 		this.position = new p5.Vector(x, y)
+		this.velocity = p5.Vector.random2D().mult(random(0.5, 4))
+		this.size = this.maxSize = 4
+		this.isDead = false
 	}
 
 	draw() {

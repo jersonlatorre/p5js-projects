@@ -1,4 +1,7 @@
 class Game {
+	static npcs = []
+	static effects = []
+	static isShaking = false
 	static waypoints = [
 		new p5.Vector(100, 100),
 		new p5.Vector(200, 100),
@@ -15,18 +18,12 @@ class Game {
 		new p5.Vector(200, 400)
 	]
 
-	towerPositions = [ new p5.Vector(200, 300), new p5.Vector(400, 100), new p5.Vector(400, 400) ]
-
-	paths = [ [ 0, 1, 2, 3, 4 ], [ 0, 5, 6, 7, 8 ], [ 0, 9, 10, 11, 12 ] ]
-
-	towers = []
-	timer = 0
-
-	static npcs = []
-	static effects = []
-	static isShaking = false
-
 	constructor() {
+		this.towerPositions = [ new p5.Vector(200, 300), new p5.Vector(400, 100), new p5.Vector(400, 400) ]
+		this.paths = [ [ 0, 1, 2, 3, 4 ], [ 0, 5, 6, 7, 8 ], [ 0, 9, 10, 11, 12 ] ]
+		this.towers = []
+		this.timer = 0
+
 		this.towerPositions.forEach((p) => {
 			let tower = new Tower(p.x, p.y)
 			this.towers.push(tower)

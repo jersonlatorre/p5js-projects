@@ -2,8 +2,8 @@ class Zzz {
 	constructor(x, y) {
 		this.position = new p5.Vector(x, y)
 		this.velocity = p5.Vector.random2D()
-		this.opacity = 1
 		this.isDead = false
+		this.opacity = 1
 	}
 
 	draw() {
@@ -14,7 +14,7 @@ class Zzz {
 		textStyle(BOLD)
 		textAlign(CENTER, CENTER)
 		text('Z', this.position.x, this.position.y)
-		
+
 		this.position.add(this.velocity)
 		this.opacity -= 0.025
 		if (this.opacity < 0) {

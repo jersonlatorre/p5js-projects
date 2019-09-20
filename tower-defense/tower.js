@@ -1,24 +1,22 @@
 class Tower {
-	attackRadius = 250
-	actionRadius = 50
-	bullets = []
-	position
-	basePosition
-	t = 0
-	velocity = new p5.Vector(0, 0)
-	steer
-	maxForce = 1
-	maxSteer = 0.9
-
-	zzzs = []
-	timerZzz = 0
-
-	State = { SLEEPING: 0, ATTACKING: 1, RETURNING: 2 }
-	state = this.State.SLEEPING
-
 	constructor(x, y) {
-		this.position = new p5.Vector(x, y)
 		this.basePosition = new p5.Vector(x, y)
+		this.position = new p5.Vector(x, y)
+		this.velocity = new p5.Vector(0, 0)
+
+		this.attackRadius = 250
+		this.actionRadius = 50
+		this.tAttack = 0
+		this.bullets = []
+
+		this.maxForce = 1
+		this.maxSteer = 0.9
+
+		this.zzzs = []
+		this.timerZzz = 0
+
+		this.State = { SLEEPING: 0, ATTACKING: 1, RETURNING: 2 }
+		this.state = this.State.SLEEPING
 	}
 
 	draw() {
@@ -45,24 +43,24 @@ class Tower {
 			}
 
 			case this.State.ATTACKING: {
-				let nearest = this.getNearestNpc()
+				let nearestNpc = this.getNearestNpc()
+				let steer = new p5.Vector(0, 0)
 
-				if (nearest != null) {
-					this.steer = new p5.Vector(0, 0)
-					this.steer.add(SteeringBehaviours.arrive(this, this.basePosition, this.actionRadius))
-					this.steer.add(SteeringBehaviours.seek(this, nearest.position))
+				if (nearestNpc != null) {
+					steer.add(SteeringBehaviours.arrive(this, this.basePosition, this.actionRadius))
+					steer.add(SteeringBehaviours.seek(this, nearestNpc.position))
 
-					if (this.t % 15 == 0) {
-						let bullet = new Bullet(this.position.x, this.position.y, nearest)
+					if (this.tAttack % 15 == 0) {
+						let bullet = new Bullet(this.position.x, this.position.y, nearestNpc)
 						this.bullets.push(bullet)
 					}
 
-					this.t += 1
+					this.tAttack += 1
 				} else {
 					this.state = this.State.RETURNING
 				}
 
-				this.velocity.add(this.steer)
+				this.velocity.add(steer)
 				this.position.add(this.velocity)
 
 				noStroke()
@@ -75,8 +73,8 @@ class Tower {
 			}
 
 			case this.State.RETURNING: {
-				this.steer = SteeringBehaviours.arrive(this, this.basePosition, this.actionRadius)
-				this.velocity.add(this.steer)
+				let steer = SteeringBehaviours.arrive(this, this.basePosition, this.actionRadius)
+				this.velocity.add(steer)
 				this.position.add(this.velocity)
 
 				if (this.velocity.mag() < 0.1) {
@@ -92,6 +90,7 @@ class Tower {
 				circle(this.position.x, this.position.y, 20)
 				fill('rgba(0, 0, 0, 0.2)')
 				circle(this.position.x, this.position.y, 10)
+
 				break
 			}
 		}
@@ -117,18 +116,21 @@ class Tower {
 	}
 
 	getNearestNpc() {
-		let minDist = 9999999999
+		let minDistance = 9999999999
 		let minIndex = -1
 		Game.npcs.forEach((npc, i) => {
-			let d = p5.Vector.dist(npc.position, this.position)
+			let distance = p5.Vector.dist(npc.position, this.position)
 
-			if (d < this.attackRadius / 2 && d < minDist) {
-				minDist = d
+			if (distance < this.attackRadius / 2 && distance < minDistance) {
+				minDistance = distance
 				minIndex = i
 			}
 		})
 
-		if (minIndex < 0) return null
-		else return Game.npcs[minIndex]
+		if (minIndex < 0) {
+			return null
+		} else {
+			return Game.npcs[minIndex]
+		}
 	}
 }

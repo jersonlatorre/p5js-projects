@@ -1,10 +1,9 @@
 class Wave {
-	radius = 5
-	speed = 5
-	isDead = false
-
 	constructor(x, y) {
 		this.position = new p5.Vector(x, y)
+		this.radius = 5
+		this.speed = 5
+		this.isDead = false
 	}
 
 	draw() {

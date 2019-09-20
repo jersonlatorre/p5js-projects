@@ -1,34 +1,31 @@
 class Npc {
-	position = new p5.Vector(0, 0)
-	velocity = new p5.Vector(0, 0)
-	steer = new p5.Vector(0, 0)
-	maxForce = 1.5
-	maxSteer = 0.08
-
-	speed
-	maxHp = 100
-	minSize = 5
-	maxSize = 18
-	isDead = false
-	index = 0
-	t = 0
-	tAppear = 0
-	size = 0
-	State = { APPEARING: 0, MOVING: 1, DEAD: 2 }
-	state = this.State.APPEARING
-	hp = this.maxHp
-
 	constructor(path) {
 		this.path = path
 		this.speed = Global.npcSpeed
+		this.currentPointIndex = 0
+		this.tAppear = 0
+
+		this.position = new p5.Vector(0, 0)
+		this.velocity = new p5.Vector(0, 0)
+		this.maxForce = 1.5
+		this.maxSteer = 0.08
+
+		this.size = 0
+		this.minSize = 5
+		this.maxSize = 18
+		this.hp = this.maxHp = 100
+		this.isDead = false
+
+		this.State = { APPEARING: 0, MOVING: 1, DEAD: 2 }
+		this.state = this.State.APPEARING
 	}
 
 	draw() {
 		switch (this.state) {
 			case this.State.APPEARING: {
-				let p = Game.waypoints[this.path[this.index]]
+				let startPoint = Game.waypoints[this.path[0]]
 				push()
-				translate(p.x, p.y)
+				translate(startPoint.x, startPoint.y)
 				fill('rgb(220, 80, 0)')
 				noStroke()
 				circle(0, 0, this.size)
@@ -42,32 +39,25 @@ class Npc {
 					this.size = this.maxSize
 					this.state = this.State.MOVING
 					this.tAppear = 0
-					this.position = new p5.Vector(p.x, p.y)
+					this.position = new p5.Vector(startPoint.x, startPoint.y)
 				}
 
 				break
 			}
 
 			case this.State.MOVING: {
-				// usando steering behaviours
-				let p = Game.waypoints[this.path[this.index]]
-				let pos = new p5.Vector(p.x, p.y)
-				this.velocity.add(SteeringBehaviours.seek(this, pos))
+				let currentPoint = Game.waypoints[this.path[this.currentPointIndex]]
+				let steer = SteeringBehaviours.seek(this, currentPoint)
+				this.velocity.add(steer)
 				this.position.add(this.velocity)
-				if (p5.Vector.dist(p, this.position) < 10) {
-					this.index++
-					if (this.index > this.path.length - 1) {
+				
+				if (p5.Vector.dist(currentPoint, this.position) < 10) {
+					this.currentPointIndex++
+					if (this.currentPointIndex > this.path.length - 1) {
 						this.state = this.State.DEAD
 						this.win()
 					}
 				}
-
-				// usando LERP
-				// let p1 = Game.waypoints[this.path[this.index]]
-				// let p2 = Game.waypoints[this.path[this.index + 1]]
-				// this.position = p5.Vector.lerp(p1, p2, this.t)
-				// this.t += this.speed * 0.02
-				// if (this.t >= 1) this.next()
 
 				push()
 				translate(this.position.x, this.position.y)
@@ -96,8 +86,8 @@ class Npc {
 
 	next() {
 		this.t = 0
-		this.index++
-		if (this.index > this.path.length - 2) {
+		this.currentPointIndex++
+		if (this.currentPointIndex > this.path.length - 2) {
 			this.win()
 		}
 	}
