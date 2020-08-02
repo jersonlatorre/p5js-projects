@@ -6,8 +6,8 @@ let index = 0
 let timer = 0
 let colors = ['147,238,89', '177,238,89']
 function preload() {
-	// font = loadFont('cocogoose.ttf')
-	font = loadFont('Coyotris Serif.ttf')
+	font = loadFont('cocogoose.ttf')
+	// font = loadFont('Coyotris Serif.ttf')
 }
 
 function setup() {
