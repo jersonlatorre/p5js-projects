@@ -1,31 +1,20 @@
 let CANVAS_SIZE = 1080
-let LEVELS = 10
-let MARGIN = 100
-let font
+let LEVELS = 4
+let MARGIN = 10
 let index = 0
 let timer = 0
-let colors = ['147,238,89', '177,238,89']
-function preload() {
-	font = loadFont('cocogoose.ttf')
-	// font = loadFont('Coyotris Serif.ttf')
-}
+let simplex = new SimplexNoise()
 
 function setup() {
 	createCanvas(CANVAS_SIZE, CANVAS_SIZE)
-	// colorMode(HSB)
-	textFont(font)
-	textAlign(CENTER, CENTER)
+	rectMode(CENTER)
 	smooth()
 }
 
 function draw() {
-	background('white')
+	background('black')
 
-	timer += 0.2 * deltaTime / 1000
-	if (timer >= 1) {
-		timer = 0
-	}
-
+	timer += 1 * deltaTime / 3000
 	index = 0
 
 	divideRect(
@@ -57,37 +46,30 @@ function divideRect(rect, level) {
 			rect.y3 * rect.x4 +
 			rect.x4 * rect.y1 -
 			rect.y4 * rect.x1)
-	let r = sqrt(area / 6)
 
-	// if (level == 0) {
-	// fill(map(r, 5, 22, 100, 255))
-	stroke(0)
-	fill('rgb(' + colors[index % colors.length] + ')')
-	strokeWeight(map(level, 0, LEVELS, 1, 15))
-	beginShape()
-	vertex(rect.x1, rect.y1)
-	vertex(rect.x2, rect.y2)
-	vertex(rect.x3, rect.y3)
-	vertex(rect.x4, rect.y4)
-	vertex(rect.x1, rect.y1)
-	endShape()
+	stroke('rgba(255, 255, 255,' + map(level, 0, LEVELS, 1, 0) + ')')
+	fill('rgba(255, 255, 255,' + 0 + ')')
+	strokeWeight(map(level, 0, LEVELS, 8, 3))
+
+	// beginShape()
+	// vertex(rect.x1, rect.y1)
+	// vertex(rect.x2, rect.y2)
+	// vertex(rect.x3, rect.y3)
+	// vertex(rect.x4, rect.y4)
+	// vertex(rect.x1, rect.y1)
+	// endShape()
 
 	let cx = (rect.x1 + rect.x2 + rect.x3 + rect.x4) >> 2
 	let cy = (rect.y1 + rect.y2 + rect.y3 + rect.y4) >> 2
-	noStroke()
-	fill(0)
-	circle(cx, cy, 5)
-	// push()
-	// translate(cx, cy)
-	// rotate(PI / 2)
-	// scale(r / 6)
-	// text(':)', 0, 0)
-	// pop()
-	// }
+	if (level % 2 == 0) {
+		square(cx, cy, area / 800)
+	}
 
-	let bias = 0.25 // map(mouseX, 0, width, 0, 1)
-	let r1 = bias + (1 - 2 * bias) * noise(millis() / 3000, index)
-	let r2 = bias + (1 - 2 * bias) * noise(millis() / 4000, index + 5)
+	let bias = 0.2 // map(mouseX, 0, width, 0, 1)
+	let n1 = map(simplex.noise2D(timer, index), -1, 1, 0, 1)
+	let n2 = map(simplex.noise2D(timer, index + 5), -1, 1, 0, 1)
+	let r1 = bias + (1 - 2 * bias) * n1
+	let r2 = bias + (1 - 2 * bias) * n2
 
 	if (level % 2 == 0) {
 		divideRect(
