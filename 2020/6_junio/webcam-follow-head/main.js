@@ -10,6 +10,7 @@ function preload() {
 }
 
 function setup() {
+	navigator.mediaDevices.enumerateDevices()
 	createCanvas(1440, 900, WEBGL)
 	setAttributes('antialias', true)
 

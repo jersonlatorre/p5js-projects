@@ -3,7 +3,7 @@ let t = 0
 let dt = 0.006
 
 function setup() {
-  createCanvas(500, 500)
+  createCanvas(700, 700)
   // noCursor()
 }
 
@@ -20,8 +20,8 @@ function draw() {
 
   for (let i = 1; i < N; i++) {
     for (let j = 1; j < N; j++) {
-      let x = (i * 500) / N
-      let y = (j * 500) / N
+      let x = (i * 700) / N
+      let y = (j * 700) / N
       let distance = dist(x, y, mx, my)
       
       if (distance < minDistance) {
@@ -38,10 +38,10 @@ function draw() {
 
   fill('red')
   noStroke()
-  circle((minI * 500) / N, (minJ * 500) / N, 13)
+  circle((minI * 700) / N, (minJ * 700) / N, 13)
   strokeWeight(5)
   stroke('red')
-  line((minI * 500) / N, (minJ * 500) / N, mx, my)
+  line((minI * 700) / N, (minJ * 700) / N, mx, my)
 
   minDistance = 9999999
   let minI2
@@ -49,8 +49,8 @@ function draw() {
   
   for (let i = 1; i < N; i++) {
     for (let j = 1; j < N; j++) {
-      let x = (i * 500) / N
-      let y = (j * 500) / N
+      let x = (i * 700) / N
+      let y = (j * 700) / N
       let distance = dist(x, y, mx, my)
       
       if (i == minI && j == minJ) continue
@@ -64,10 +64,10 @@ function draw() {
 
   fill('red')
   noStroke()
-  circle((minI2 * 500) / N, (minJ2 * 500) / N, 13)
+  circle((minI2 * 700) / N, (minJ2 * 700) / N, 13)
   strokeWeight(5)
   stroke('red')
-  line((minI2 * 500) / N, (minJ2 * 500) / N, mx, my)
+  line((minI2 * 700) / N, (minJ2 * 700) / N, mx, my)
 
   minDistance = 9999999
   let minI3
@@ -75,8 +75,8 @@ function draw() {
   
   for (let i = 1; i < N; i++) {
     for (let j = 1; j < N; j++) {
-      let x = (i * 500) / N
-      let y = (j * 500) / N
+      let x = (i * 700) / N
+      let y = (j * 700) / N
       let distance = dist(x, y, mx, my)
       
       if (i == minI && j == minJ) continue
@@ -91,10 +91,10 @@ function draw() {
 
   fill('red')
   noStroke()
-  circle((minI3 * 500) / N, (minJ3 * 500) / N, 13)
+  circle((minI3 * 700) / N, (minJ3 * 700) / N, 13)
   strokeWeight(5)
   stroke('red')
-  line((minI3 * 500) / N, (minJ3 * 500) / N, mx, my)
+  line((minI3 * 700) / N, (minJ3 * 700) / N, mx, my)
 
   noStroke()
   fill('red')
