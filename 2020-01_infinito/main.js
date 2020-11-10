@@ -1,4 +1,4 @@
-let CANVAS_SIZE = 600
+let CANVAS_SIZE = 1080
 let s
 
 function preload() {}
@@ -10,6 +10,6 @@ function setup() {
 
 function draw() {
 	scale(CANVAS_SIZE / 1080)
-	background('black')
+	background('white')
 	s.draw()
 }

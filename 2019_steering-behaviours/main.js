@@ -5,7 +5,7 @@ let simplex
 
 function setup() {
 	pixelDensity(1)
-	createCanvas(500, 500, WEBGL)
+	createCanvas(800, 800, WEBGL)
 	setAttributes('antialias', true)
 
   simplex = openSimplexNoise(0)
