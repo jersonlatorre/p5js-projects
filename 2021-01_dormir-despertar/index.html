@@ -6,18 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style/main.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.js"></script>
   <script src="src/main.js"></script>
   <script src="src/state.js"></script>
   <script src="src/easings.js"></script>
   <script src="src/simplex-noise.js"></script>
   <script src="src/seed-noise.js"></script>
+  <script src="src/star.js"></script>
+  <script src="src/global.js"></script>
   <title>.</title>
 </head>
 
 <body>
-  <div id="p5"></div>
-  <div id="message" class="white">
-    <p>¿<span id="dormir" class="word">dormir</span> o <span id="despertar" class="word">despertar</span>?</p>
+  <div id="container">
+    <div id="p5"></div>
+    <div id="message" class="white">
+      <p>el <span id="dormir" class="word">sueño</span> me protege de la <span id="despertar" class="word">verdad</span></p>
+    </div>
   </div>
 </body>
 

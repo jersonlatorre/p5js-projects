@@ -15,12 +15,17 @@ canvas {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
+#container {
+  position: relative;
+  width: 1080px;
+  height: 1920px;
+}
 #message {
   position: absolute;
-  /* top: 1450px; */
   left: 0;
   /* font-family: Arial, Helvetica, sans-serif; */
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  letter-spacing: 1px;
   z-index: 100;
   width: 100%;
   text-align: center;
