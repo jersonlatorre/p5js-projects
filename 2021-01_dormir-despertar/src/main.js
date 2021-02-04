@@ -1,7 +1,8 @@
-const FACTOR = 1
+const FACTOR = window.innerHeight / 1920
 
 let simplex
 
+// contantes
 const NOISE_SPEED = 0.4
 const MIN_STARS_SIZE = 4
 const MAX_STARS_SIZE = 8
@@ -11,41 +12,35 @@ const TRANSITION_SPEED = 0.8
 const CLOUD_RESOLUTION = 25
 const CLOUD_WIDTH = 280
 const CLOUD_HEIGHT = 130
-
 const CLOUDS_TOP = 1000
-const MESSAGE_TOP = 1250
-
-let clickTime = 0
+const MESSAGE_TOP = 1250 * FACTOR
 
 let state, open, close
 let backgroundColor, cloudColor
-let message
-
-let bgBlack, bgWhite, whoosh
+let soundNight, soundDay, soundWoosh
 
 let stars = []
 
 function preload() {
   open = loadImage('assets/open.svg')
   close = loadImage('assets/close.svg')
-  bgBlack = new Howl({ src: [ 'assets/bgBlack.mp3' ], loop: true, volume: 0.5 })
-  bgWhite = new Howl({ src: [ 'assets/bgWhite.mp3' ], loop: true, volume: 0 })
-  whoosh = new Howl({ src: [ 'assets/whoosh.mp3' ] })
+  soundNight = new Howl({ src: [ 'assets/bgBlack.mp3' ], loop: true, volume: 0.5 })
+  soundDay = new Howl({ src: [ 'assets/bgWhite.mp3' ], loop: true, volume: 0 })
+  soundWoosh = new Howl({ src: [ 'assets/whoosh.mp3' ] })
 
-  bgBlack.play()
-
-  bgWhite.play()
-
-  whoosh.volume(0.7)
+  soundNight.play()
+  soundDay.play()
+  soundWoosh.volume(0.7)
 }
 
 function setup() {
-  let canvas = createCanvas(1080 * FACTOR, 1920 * FACTOR)
+  let canvas = createCanvas(windowWidth, 1920 * FACTOR)
   canvas.parent('p5')
 
   imageMode(CENTER)
   noStroke()
 
+  Global.xFactor = 1920 * windowWidth / windowHeight
   Global.time = 0
   simplex = new SimplexNoise('2')
   state = State.NIGHT
@@ -57,13 +52,13 @@ function setup() {
   select('#message').position(0, MESSAGE_TOP)
 
   select('#despertar').mouseClicked(() => {
-    if (state != State.DAY) whoosh.play()
+    if (state != State.DAY) soundWoosh.play()
     state = State.NIGHT_TO_DAY
     select('#message').class('black')
   })
 
   select('#dormir').mouseClicked(() => {
-    if (state != State.NIGHT) whoosh.play()
+    if (state != State.NIGHT) soundWoosh.play()
     state = State.DAY_TO_NIGHT
     select('#message').class('white')
   })
@@ -93,8 +88,8 @@ function draw() {
       drawClouds()
       drawEye()
 
-      bgBlack.volume(map(Global.t, 0, 1, 0.5, 0))
-      bgWhite.volume(map(Global.t, 0, 1, 0, 0.5))
+      soundNight.volume(map(Global.t, 0, 1, 0.5, 0))
+      soundDay.volume(map(Global.t, 0, 1, 0, 0.5))
 
       // pasa el tiempo
       Global.t += TRANSITION_SPEED * deltaTime / 1000
@@ -113,8 +108,8 @@ function draw() {
       drawClouds()
       drawEye()
 
-      bgBlack.volume(map(Global.t, 0, 1, 0.5, 0))
-      bgWhite.volume(map(Global.t, 0, 1, 0, 0.5))
+      soundNight.volume(map(Global.t, 0, 1, 0.5, 0))
+      soundDay.volume(map(Global.t, 0, 1, 0, 0.5))
 
       // pasa el tiempo
       Global.t -= TRANSITION_SPEED * deltaTime / 1000
@@ -137,8 +132,6 @@ function draw() {
       break
     }
   }
-
-  // rect(0, 420, 1920, 1080)
 }
 
 function drawBackground() {
@@ -159,7 +152,7 @@ function drawPlanet() {
     fill('rgba(245, 210, 90,' + alpha + ')')
   }
 
-  circle(540, CLOUDS_TOP - 350 + distanceToCloud, 70)
+  circle(0.5 * Global.xFactor, CLOUDS_TOP - 350 + distanceToCloud, 70)
 }
 
 function drawClouds() {
@@ -170,9 +163,9 @@ function drawClouds() {
 
 function drawEye() {
   if (Global.t <= 0.5) {
-    image(close, 540, CLOUDS_TOP - 50)
+    image(close, 0.5 * Global.xFactor, CLOUDS_TOP - 50)
   } else {
-    image(open, 540, CLOUDS_TOP - 50)
+    image(open, 0.5 * Global.xFactor, CLOUDS_TOP - 50)
   }
 }
 
@@ -196,11 +189,15 @@ function drawNoise(seed, alpha) {
 function addVertex(i, seed) {
   let angle, x, y
   angle = i * 2 * PI / CLOUD_RESOLUTION
-  x = 540 + CLOUD_WIDTH * cos(angle)
+  x = 0.5 * Global.xFactor + CLOUD_WIDTH * cos(angle)
   y =
     CLOUDS_TOP +
     (CLOUD_HEIGHT + CLOUD_HEIGHT * (1 + simplex.noise2D(i, Global.time * NOISE_SPEED + seed)) * 0.5) * sin(angle)
 
   if (y > CLOUDS_TOP) y = CLOUDS_TOP + (y - CLOUDS_TOP) * 0.3
   curveVertex(x, y)
+}
+
+function windowResized() {
+  window.location = '/'
 }

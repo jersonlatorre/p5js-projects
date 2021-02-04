@@ -1,6 +1,6 @@
 class Star {
   constructor() {
-    this.x = random(1080)
+    this.x = random(Global.xFactor)
     this.y = random(1920)
     this.maxSize = random(1, 7)
     this.speed = random(0.5, 2)
@@ -10,12 +10,12 @@ class Star {
 
   draw() {
     let size = this.maxSize * sin(Global.time * this.twinkleSpeed + this.seed)
-    
     let speedFactor = map(easeJump(Global.t), 0, 1, 1, 20)
-    this.x += this.speed * speedFactor
     
-    if (this.x > 1080) {
-      this.x -= 1080
+    this.x += this.speed * speedFactor
+
+    if (this.x > Global.xFactor) {
+      this.x -= Global.xFactor
     }
 
     ellipse(this.x, this.y, size * speedFactor, size / speedFactor)
