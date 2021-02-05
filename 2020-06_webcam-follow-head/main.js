@@ -1,6 +1,6 @@
 let poseNet
 let pose
-let smoother = new PoseSmoother(0.8)
+let smoother = new PoseSmoother(0.9)
 let video
 let head
 let boxes = []
