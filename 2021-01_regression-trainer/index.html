@@ -17,25 +17,27 @@
   <div id="container">
     <h1>Entrenamiento usando <br> MobileNet</h1>
     <div id="modelStatusContainer">
-      <div id="modelStatusIndicator"></div>
+      <img id="modelStatusIndicator" src="/assets/error.svg">
       <div id="modelStatusMessage">cargando modelo...</div>
     </div>
     <div id="videoStatusContainer">
-      <div id="videoStatusIndicator"></div>
+      <img id="videoStatusIndicator" src="/assets/error.svg">
       <div id="videoStatusMessage">cargando webcam</div>
     </div>
-    <div id="videoContainer"></div>
+    <div id="videoContainer">
+      <img id="flipButton" src="assets/flip.svg">
+    </div>
     <div id="states">
       <div class="state">
-        <button id="state1">Agregar estado 1</button>
+        <button id="state1" class="disabled">Agregar estado 1</button>
         <div id="stateCounter1" class="samples">0 muestras</div>
       </div>
       <div class="state">
-        <button id="state2">Agregar estado 2</button>
+        <button id="state2" class="disabled">Agregar estado 2</button>
         <div id="stateCounter2" class="samples">0 muestras</div>
       </div>
     </div>
-    <button id="train">Entrenar Modelo</button>
+    <button id="train" class="disabled">Entrenar Modelo</button>
     <button id="reset">Reiniciar Modelo</button>
   </div>
 </body>

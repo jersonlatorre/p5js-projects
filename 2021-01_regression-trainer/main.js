@@ -8,6 +8,10 @@ let smoothValue = 0
 let numSamples1 = 0
 let numSamples2 = 0
 
+let isVideoReady = false
+let isModelReady = false
+let isFlip = true
+
 let VIDEO_SIZE = 320
 
 let isTrained = false
@@ -28,15 +32,22 @@ function initModel() {
   regressor = featureExtractor.regression(video, videoReady)
 
   select('#modelStatusMessage').html('cargando modelo...')
-  select('#modelStatusIndicator').style('background-color', 'red')
+  // select('#modelStatusIndicator').style('background-color', 'red')
 
   select('#videoStatusMessage').html('cargando webcam')
-  select('#videoStatusIndicator').style('background-color', 'red')
+  // select('#videoStatusIndicator').style('background-color', 'red')
 }
 
 function draw() {
   background('black')
+
+  push()
+  if (isFlip) {
+    translate(width, 0)
+    scale(-1, 1)
+  }
   image(video, 0, 0, video.width, video.height)
+  pop()
 
   if (isTrained) {
     smoothValue = lerp(smoothValue, value, 0.1)
@@ -49,7 +60,13 @@ function draw() {
 // A function to be called when the model has been loaded
 function modelReady() {
   select('#modelStatusMessage').html('modelo cargado')
-  select('#modelStatusIndicator').style('background-color', 'rgb(0, 140, 255)')
+  // select('#modelStatusIndicator').style('background-color', 'rgb(0, 140, 255)')
+  select('#modelStatusIndicator').elt.src = '/assets/check.svg'
+
+  isModelReady = true
+  if (isVideoReady) {
+    enableButtons()
+  }
 }
 
 // A function to be called when the video has loaded
@@ -58,7 +75,20 @@ function videoReady() {
   resizeCanvas(VIDEO_SIZE, VIDEO_SIZE / aspectRatio)
   video.size(VIDEO_SIZE, VIDEO_SIZE / aspectRatio)
   select('#videoStatusMessage').html('webcam cargada')
-  select('#videoStatusIndicator').style('background-color', 'rgb(0, 140, 255)')
+  console.log(select('#videoStatusIndicator'))
+  console.log(select('#videoStatusIndicator').elt)
+  select('#videoStatusIndicator').elt.src = '/assets/check.svg'
+
+  isVideoReady = true
+  if (isModelReady) {
+    enableButtons()
+  }
+}
+
+function enableButtons() {
+  select('#state1').removeClass('disabled')
+  select('#state2').removeClass('disabled')
+  select('#train').removeClass('disabled')
 }
 
 // Classify the current frame.
@@ -83,7 +113,7 @@ function setupButtons() {
   // Train Button
   select('#train').mousePressed(() => {
     if (isTrained) {
-      console.log('descargar')
+      featureExtractor.save()
     } else {
       regressor.train(function(lossValue) {
         if (lossValue) {
@@ -104,7 +134,13 @@ function setupButtons() {
     select('#stateCounter1').html('0 muestras')
     select('#stateCounter2').html('0 muestras')
     select('#train').html('Entrenar Modelo')
+    select('#modelStatusIndicator').elt.src = '/assets/error.svg'
+    select('#videoStatusIndicator').elt.src = '/assets/error.svg'
     initModel()
+  })
+
+  select('#flipButton').mousePressed(() => {
+    isFlip = !isFlip
   })
 }
 
