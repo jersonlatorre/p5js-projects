@@ -10,7 +10,7 @@ let color
 let type = 1
 
 function setup() {
-	createCanvas(800, 800)
+	createCanvas(windowWidth, windowHeight)
 	textAlign(CENTER, CENTER)
 	textSize(TEXT_SIZE)
 	frameRate(30)

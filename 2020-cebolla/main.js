@@ -12,7 +12,7 @@ function setup() {
 }
 
 function draw() {
-  background('black')
+  background('blue')
 
   timer += 1 * deltaTime / 3000
   index = 0
