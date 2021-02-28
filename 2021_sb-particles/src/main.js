@@ -1,28 +1,32 @@
 let agents = []
 let font
+let fps
+let fg
 
 function preload() {
   font = loadFont('assets/Hack-Bold.ttf')
 }
 
 function setup() {
-  colorMode(HSL, 100, 100, 100)
-  createCanvas(windowWidth, windowHeight, WEBGL)
+  createCanvas(windowWidth, windowHeight)
   textFont(font)
   frameRate(60)
+  colorMode(HSB)
+  background('black')
 
   for (let i = 0; i < 600; i++) {
     let agent = new Agent()
-    agent.position = new p5.Vector(random(0, width), random(height * 0.5, height))
+    agent.position = new p5.Vector(random(width), random(height))
     agents.push(agent)
   }
 
-  setAttributes('antialias', true)
+  fg = createGraphics(windowWidth, windowHeight, WEBGL)
+  // fps = new Fps()
 }
 
 function draw() {
-  background(0)
-  translate(-width / 2, -height / 2)
+  // translate(-width / 2, -height / 2)
+  background(0, 0.01)
 
   rectMode(CENTER)
   textAlign(CENTER, CENTER)
@@ -31,11 +35,18 @@ function draw() {
     agent.draw()
   })
 
-  let fps = frameRate()
-  fill(255)
-  stroke(255)
-  textAlign(TOP, LEFT)
-  text('FPS: ' + fps.toFixed(0), 10, 20)
+  // fg.fill(0, 0)
+  // fg.noFill()
+  // fg.stroke('white')
+  // fg.push()
+  // fg.rotate(millis() / 1000)
+  // fg.box(100)
+  // fg.pop()
+  // image(fg, 0, 0)
+
+  // rectMode(CENTER)
+  // fill(255, 0.9)
+  // rect(width / 2, height / 2, width, 200)
 }
 
 function windowResized() {
