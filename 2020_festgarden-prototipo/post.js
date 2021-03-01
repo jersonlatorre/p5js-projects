@@ -7,7 +7,8 @@ class Post {
     this.h = 10000 / this.w
 
     this.velocity = createVector()
-
+    this.maxSpeed = 3
+    this.maxSteer = 1
     this.scale = 0
   }
 
@@ -29,30 +30,32 @@ class Post {
 
     // fuerzas evade
     posts.forEach((post, i) => {
-      if (this.collideWith(post)) {
-        let desired = this.position.copy().sub(post.position).normalize().mult(3)
-        totalEvade.add(desired)
+      if (this.collideWith(post, 20)) {
+        let flee = this.position.copy().sub(post.position).normalize().mult(this.maxSpeed)
+        totalEvade.add(flee)
       }
     })
 
     // fuerzas de atracción
     // posts.forEach((post, i) => {
-    //   let distance = this.position.copy().sub(post.position).mag()
-    //   if (this.color == post.color && distance > 0) {
-    //     let desired = post.position.copy().sub(this.position).normalize().mult(100 / distance)
+    //   if (this.color == post.color && this != post && !this.collideWith(post, 100)) {
+    //     let desired = post.position.copy().sub(this.position).normalize().mult(1)
     //     totalAtract.add(desired)
     //   }
     // })
 
     totalDesired = totalEvade.mult(1).add(totalAtract.mult(1))
 
-    let steer = totalDesired.copy().sub(this.velocity).limit(0.5)
+    let steer = totalDesired.copy().sub(this.velocity).limit(this.maxSteer)
     this.velocity.add(steer)
     this.position.add(this.velocity)
   }
 
-  collideWith(other) {
-    let gap = 20
+  squaredDistance(p1, p2) {
+    return (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)
+  }
+
+  collideWith(other, gap) {
     return (
       this.position.x + this.w / 2 + gap > other.position.x - other.w / 2 &&
       this.position.x - this.w / 2 - gap < other.position.x + other.w / 2 &&

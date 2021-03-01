@@ -28,13 +28,16 @@ class Fps {
       this.update()
     })
     
-    fill('red')
     rectMode(CORNER)
-    rect(0, 0, 70, 32)
-
+    push()
+    fill('black')
+    translate(0, 0, 0.1)
+    rect(0, 0, 72, 32)
+    
     fill('white')
     noStroke()
     textAlign(TOP, LEFT)
     text('FPS: ' + this.value, 10, 20)
+    pop()
   }
 }
