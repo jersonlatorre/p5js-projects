@@ -58,21 +58,21 @@ function create() {
 
   this.anims.create({
     key: 'malo-idle',
-    frameRate: 8,
+    frameRate: 12,
     frames: this.anims.generateFrameNumbers('malo', { start: 0, end: 3 }),
     repeat: -1
   })
 
   this.anims.create({
     key: 'bueno-idle',
-    frameRate: 8,
+    frameRate: 12,
     frames: this.anims.generateFrameNumbers('bueno', { start: 0, end: 3 }),
     repeat: -1
   })
 
   this.anims.create({
     key: 'npc-die',
-    frameRate: 15,
+    frameRate: 12,
     frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 7 }),
     repeat: 0
   })
