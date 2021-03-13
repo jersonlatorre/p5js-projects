@@ -19,21 +19,19 @@ class Pixel {
   draw() {
     let c = images[this.currentFrame][this.i][this.j]
     let b = brightness(c)
+    let m = millis() / 300
 
     push()
     let d = this.squaredDistance(this.x, this.y, mouseX, mouseY)
     if (d <= 3600) {
       let f = 1 - d / 3600
       f *= f
-      let v = f * 10 * (1 - this.t)
+      let v = f * 5 * (1 - this.t)
 
-      let n1 = simplex.noise3D(this.i, this.j, millis() / 300)
-      let n2 = simplex.noise3D(this.i, this.j, millis() / 300 + 1)
+      let n1 = simplex.noise3D(this.i, this.j, m)
+      let n2 = simplex.noise3D(this.i, this.j, m + 1)
 
-      // n1 = map(n1, -1, 1, 0, 1)
-      // n2 = map(n2, -1, 1, 0, 1)
-
-      translate(v * n1, v * n2, 20 * f)
+      translate(v * n1, v * n2)
     }
 
     switch (this.state) {

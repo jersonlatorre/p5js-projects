@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/addons/p5.sound.min.js"></script>
+  <script src="src/box.js"></script>
+  <script src="src/global.js"></script>
+  <script src="src/main.js"></script>
+  <title>.</title>
+  <style>
+    html,
+    body {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: white;
+    }
+
+    #canvas {
+      height: 523px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    canvas {
+      border-radius: 8px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      background-color: white;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    button:hover {
+      background-color: #eee
+    }
+
+    button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="canvas"></div>
+</body>
+
+</html>

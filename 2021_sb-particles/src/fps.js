@@ -1,6 +1,6 @@
 class Fps {
   constructor() {
-    this.numValues = 100
+    this.numValues = 10
     this.values = []
     this.value = 0
 

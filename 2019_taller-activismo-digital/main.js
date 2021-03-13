@@ -1,5 +1,5 @@
-let DISTANCE = 13
-let BORDER = 3
+let DISTANCE = 11
+let BORDER = 20
 let W = 25
 let H = 45
 
@@ -129,6 +129,5 @@ function mousePressed() {
 	// 	nextColor = colors[0]
 	// } else {
 	// 	nextColor = colors[currentFrame + 1]
-	// }
 	// }
 }

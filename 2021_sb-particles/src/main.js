@@ -8,7 +8,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL)
+  createCanvas(windowWidth, windowHeight)
   textFont(font)
   frameRate(60)
   colorMode(HSB)
@@ -29,7 +29,7 @@ function setup() {
 }
 
 function draw() {
-  translate(-width / 2, -height / 2)
+  // translate(-width / 2, -height / 2)
   
   fill(0, 0.01)
   rect(0, 0, width, height)
