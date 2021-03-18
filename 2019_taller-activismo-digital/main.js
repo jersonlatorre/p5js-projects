@@ -1,5 +1,5 @@
-let DISTANCE = 11
-let BORDER = 20
+let DISTANCE = 12
+let BORDER = -5
 let W = 25
 let H = 45
 
@@ -74,7 +74,7 @@ function setup() {
 function draw() {
   translate(width / 2, height / 2)
 	noStroke()
-	background('#666')
+	background('#000')
 	currentColor = lerpColor(prevColor, nextColor, tColor)
 
 	pixels.forEach((pixel) => {
