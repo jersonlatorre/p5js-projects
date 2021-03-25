@@ -1,7 +1,6 @@
 let agents = []
 let font
 let fps
-let mic
 
 function preload() {
   font = loadFont('assets/Hack-Bold.ttf')
@@ -13,11 +12,6 @@ function setup() {
   frameRate(60)
   colorMode(HSB)
   background('black')
-
-  getAudioContext().suspend()
-
-  mic = new p5.AudioIn()
-  mic.start()
 
   for (let i = 0; i < 600; i++) {
     let agent = new Agent()
@@ -45,8 +39,4 @@ function draw() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight)
   window.location = '/'
-}
-
-function mouseClicked() {
-  userStartAudio()
 }

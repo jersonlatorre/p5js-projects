@@ -1,20 +1,21 @@
 class S {
   constructor() {
-    this.center = createVector(540, 640)
-    this.focus = createVector(540, 540)
+    this.center = createVector(540, 0)
+    this.focus = createVector(540, 400)
     this.angle = 0
-    this.radius = 280
-    this.DISTANCE = 390
+    this.radius = 260
+    this.DISTANCE = 640
 
     // point moving around the reference circle
-    this.movingPoint = createVector(540, 540 + 220)
+    this.movingPoint = createVector(540, 540)
     this.reflectedPoint = createVector(540, 540)
     this.history = []
-    this.nHistory = 110
+    this.nHistory = 120
   }
 
   draw() {
-    translate(0, -80)
+    scale(0.5)
+    translate(0, 600)
     this.angle -= 4 * deltaTime / 1500
     if (this.angle <= -2 * PI) this.angle = 0
 
@@ -46,12 +47,12 @@ class S {
 
     // locus
     noFill()
-    strokeWeight(20)
+    strokeWeight(15)
     for (let i = 0; i < this.history.length - 1; i++) {
       let p = this.history[i]
       let q = this.history[i + 1]
-      stroke(255, 0, 0)
-      // if (i % 20 == 0) {
+      stroke(colors.red)
+      // if (i % 5 == 0) {
         line(p.position.x, p.position.y, q.position.x, q.position.y)
       // }
     }
@@ -59,9 +60,11 @@ class S {
     noStroke()
     fill(colors.black)
     circle(p.x, p.y, 30)
+    fill(colors.red)
+    circle(p.x, p.y, 10)
 
     noStroke()
     fill(colors.black)
-    circle(this.focus.x, this.focus.y, 30)
+    circle(this.focus.x, this.focus.y, 20)
   }
 }

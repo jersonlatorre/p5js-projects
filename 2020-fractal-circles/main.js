@@ -1,20 +1,19 @@
 let CANVAS_SIZE = 1080
-let LEVELS = 8
-let MARGIN = 50
+let LEVELS = 6
+let MARGIN = -2
 let index = 0
 let timer = 0
 let simplex = new SimplexNoise()
 
 function setup() {
-  createCanvas(CANVAS_SIZE, CANVAS_SIZE)
+  createCanvas(CANVAS_SIZE, CANVAS_SIZE * 1.778)
   rectMode(CENTER)
-  smooth()
 }
 
 function draw() {
-  background('black')
+  background('silver')
 
-  timer += 1 * deltaTime / 3000
+  timer += 1 * deltaTime / 5000
   index = 0
 
   divideRect(
@@ -50,10 +49,10 @@ function divideRect(rect, level) {
   let cx = (rect.x1 + rect.x2 + rect.x3 + rect.x4) >> 2
   let cy = (rect.y1 + rect.y2 + rect.y3 + rect.y4) >> 2
 
-  if (random() < 0.6 && level % 2 == 0) {
-    stroke('rgba(255, 255, 255, 1)')
-    fill('rgba(255, 255, 255, 0.05)')
-    strokeWeight(map(level, 0, LEVELS, 0, 0))
+  if (random() < 0.8 && level % 2 == 0) {
+    stroke('rgba(0, 0, 0, 1)')
+    fill('rgba(0, 0, 0, 0.02)')
+    strokeWeight(map(level, 0, LEVELS, 0, 0.3))
     beginShape()
     vertex(rect.x1, rect.y1)
     vertex(rect.x2, rect.y2)
@@ -63,17 +62,17 @@ function divideRect(rect, level) {
     endShape()
 
     let n = simplex.noise3D(cx * 0.001, cy * 0.001, millis() / 5000)
-    n = map(n, -1, 1, 0.9, 1)
-    stroke('white')
+    n = map(n, -1, 1, 0, 0.2)
+    stroke('rgba(0, 0, 0, 1)')
     strokeWeight(0.6)
     circle(cx, cy, area / 500 * n)
     strokeWeight(0.15)
 
-    let ww = width * 0.03
+    // let ww = width * 0.03
     // line(cx, cy, width / 2 + random(-ww, ww), height / 2 + random(-ww, ww))
   }
 
-  let bias = map(mouseX, 0, width, 0.3, 0.7)
+  let bias = map(mouseX, 0, width, 0.4, 0.6)
   let n1 = map(simplex.noise2D(timer, index), -1, 1, 0, 1)
   let n2 = map(simplex.noise2D(timer, index + 5), -1, 1, 0, 1)
   let r1 = bias + (1 - 2 * bias) * n1

@@ -1,7 +1,7 @@
 class Explosion {
   constructor(x, y) {
     this.position = createVector(x, y)
-    this.nParticles = 25
+    this.nParticles = 50
     this.particles = []
 
     // pooling

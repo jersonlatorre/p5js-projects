@@ -10,6 +10,6 @@ function setup() {
 
 function draw() {
 	scale(CANVAS_SIZE / 1080)
-	background('white')
+	background(255)
 	s.draw()
 }

@@ -31,7 +31,8 @@ class Particle {
 
     // dibuja
     this.alpha = map(this.time, 0, this.lifeTime, 1, 0)
-    fill('rgba(255, 0, 0,' + this.alpha +  ')')
-    circle(this.position.x, this.position.y, 6)
+    noStroke()
+    fill('rgba(200, 0, 0,' + this.alpha +  ')')
+    circle(this.position.x, this.position.y, 5)
   }
 }

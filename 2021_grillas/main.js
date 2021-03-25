@@ -1,6 +1,7 @@
 let p1
 let p2
 let size = 30
+let simplex
 
 // se precargan las imágenes
 function preload() {
@@ -13,6 +14,8 @@ function setup() {
   // frameRate(5)
   p1.resize(size, size)
   p2.resize(size, size)
+
+  simplex = new SimplexNoise()
 }
 
 function draw() {
@@ -26,8 +29,6 @@ function draw() {
 
   translate(ox, oy)
 
-  console.log(ox, oy)
-
   // se hace un doble for para dibujar una rejilla
   for (let i = 0; i <= nw; i = i + 1) {
     for (let j = 0; j <= nh; j = j + 1) {
@@ -40,12 +41,12 @@ function draw() {
 
       // se calcula un valor aleatorio
       // let n = random()
-      let n = noise(i * 0.2, j * 0.2, millis() * 0.001)
-
+      let n = simplex.noise3D(i * 0.085, j * 0.085, millis() * 0.0005)
+      n = map(n, -1, 1, 0, 1)
       // se obtiene la parte entera
 
       // dependiendo de qué número resulta, se dibuja una imagen diferente
-      if (n < 0.5) image(p1, 0, 0)
+      if (n < 0.35) image(p1, 0, 0)
       else image(p2, 0, 0)
 
       pop() // ------------------------------------------ termina dibujo
