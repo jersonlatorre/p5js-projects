@@ -15,7 +15,7 @@ function setup() {
     agents.push(agent)
   }
 
-  // fps = new Fps()
+  fps = new Fps()
 }
 
 function draw() {
