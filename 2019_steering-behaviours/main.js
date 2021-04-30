@@ -31,7 +31,7 @@ class Target {
 	}
 
 	draw() {
-		let t = millis() / 2000.0
+		let t = millis() / 2000
 		this.position.x = (width / 2) * simplex.noise2D(t, 0)
 		this.position.y = (width / 2) * simplex.noise2D(t + 10, 0)
 		this.position.z = (width / 2) * simplex.noise2D(t + 20, 0)
@@ -50,8 +50,8 @@ class Agent {
     this.velocity = createVector(1, 0, 0) 
     this.desired = createVector(0, 0, 0)
     this.steer = createVector(0, 0, 0)
-    this.maxSteer = 0.01
-		this.maxForce = 1
+    this.maxSteer = 0.1
+		this.maxForce = 5
 	}
 
   draw() {
@@ -71,17 +71,17 @@ class Agent {
 		strokeWeight(3)
 
 		// dibuja el deseado
-		let d = p5.Vector.add(this.position, p5.Vector.mult(this.desired, 100))
+		let d = p5.Vector.add(this.position, p5.Vector.mult(this.desired, 15))
 		stroke('green')
 		line(p.x, p.y, p.z, d.x, d.y, d.z)
 
     // dibuja la velocidad
-    let v = p5.Vector.add(this.position, p5.Vector.mult(this.velocity, 100))
+    let v = p5.Vector.add(this.position, p5.Vector.mult(this.velocity, 15))
     stroke('blue')
 		line(p.x, p.y, p.z, v.x, v.y, v.z)
 		
 		// dibuja el steer
-		let s = p5.Vector.add(v, p5.Vector.mult(this.steer, 1000))
+		let s = p5.Vector.add(v, p5.Vector.mult(this.steer, 100))
 		stroke('red')
 		line(v.x, v.y, v.z, s.x, s.y, s.z)
   }
