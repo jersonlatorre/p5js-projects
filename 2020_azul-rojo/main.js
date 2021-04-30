@@ -1,7 +1,5 @@
-let CANVAS_SIZE = 1080
 let SIZE = 0
-let FACTOR = CANVAS_SIZE / 600
-let DOT_SIZE = 0
+let DOT_SIZE
 let NUM_DOTS = 2000
 
 let angle = 0
@@ -11,7 +9,7 @@ let marginX = 0
 let fireX, fireY, waterX, waterY
 
 function setup() {
-	createCanvas(CANVAS_SIZE * 9 / 16, CANVAS_SIZE)
+	createCanvas(windowWidth, windowHeight)
 	colorMode(HSB)
 	noStroke()
 	background('black')
@@ -19,12 +17,14 @@ function setup() {
 
 function draw() {
 	blendMode(BLEND)
-	fill('rgba(0, 0, 0, 0.25)')
+	fill('rgba(0, 0, 0, 0.5)')
 	rect(0, 0, width, height)
 
-	angle += deltaTime / 3000
-	marginX = map(cos(angle * 1.3 + PI / 2), -1, 1, 60 * FACTOR, width * 0.5)
-	marginY = map(cos(angle * 1.3 + PI / 2), -1, 1, 60 * FACTOR, height * 0.5)
+  let mean = min(width, height)
+
+	angle += deltaTime / 5000
+	marginX = map(cos(angle * 1.3 + PI / 2), -1, 1, width * 0.1, width * 0.5)
+	marginY = map(cos(angle * 1.3 + PI / 2), -1, 1, height * 0.1, height * 0.5)
 
 	blendMode(ADD)
 	drawStars()
@@ -38,21 +38,21 @@ function draw() {
 	distanceToCenter = constrain(distanceToCenter, 0, width / 2)
 	let reactionFactor = map(distanceToCenter, 0, width / 2, 1, 0.1)
 	
-	let REACTION_DISTANCE = 60 * FACTOR
+	let REACTION_DISTANCE = mean * 2
 	let dRactionDistance = constrain(dist(waterX, waterY, fireX, fireY), 0, REACTION_DISTANCE)
-	SIZE = map(dRactionDistance, 0, REACTION_DISTANCE, 120 * FACTOR , 70 * FACTOR ) * reactionFactor
+	SIZE = map(dRactionDistance, 0, REACTION_DISTANCE, width * 0.3 , width * 0.2 ) * reactionFactor
 
 	let dSize = constrain(dist(waterX, waterY, fireX, fireY), 0, REACTION_DISTANCE)
-	DOT_SIZE = map(dSize, 0, REACTION_DISTANCE, 100 * FACTOR, 15 * FACTOR)
+	DOT_SIZE = map(dSize, 0, REACTION_DISTANCE, mean * 0.15, mean * 0.01)
 }
 
 function drawStars() {
-	for (let i = 0; i < 20 * FACTOR; i++) {
+	for (let i = 0; i < 40; i++) {
 		let x = random(width)
 		let y = random(height)
 		fill('rgba(255, 255, 255, 0.33)')
-		circle(x, y, 3.2 * FACTOR)
-	}200
+		circle(x, y, 4)
+	}
 }
 
 function draWater() {
@@ -79,12 +79,17 @@ function drawFire() {
 	fireY = map(ry, -1, 1, marginY, height - marginY)
 
 	for (let i = 0; i < NUM_DOTS; i++) {
-		let x = random(width)
-		let y = random(height)
+    let v = p5.Vector.random2D().mult(SIZE)
+		let x = fireX + v.x
+		let y = fireY + v.y
 		let distance = constrain(dist(fireX, fireY, x, y), 0, SIZE)
 		let size = map(distance, 0, SIZE, DOT_SIZE, 0)
 		let hue = map(distance, 0, SIZE, 180, 255)
 		fill(255 - hue * 1.15, 255, 255 - hue)
 		circle(x, y, size)
 	}
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight)
 }
