@@ -12,7 +12,7 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight)
   simplex = new SimplexNoise()
-  for (let i = 0; i < 300; i++) {
+  for (let i = 0; i < 100; i++) {
     Global.agents.push(new Agent())
   }
 
