@@ -36,12 +36,18 @@ canvas {
 
 .word {
   cursor: pointer;
-  font-weight: bold;
   font-size: 3vhz;
+  pointer-events: none;
+}
+
+.underlined {
+  text-decoration: underline;
+  font-weight: bold;
+  pointer-events: all;
 }
 
 .word:hover {
-  text-decoration: underline;
+  color: gray;
 }
 
 #message.white {

@@ -55,12 +55,16 @@ function setup() {
     if (state != State.DAY) soundWoosh.play()
     state = State.NIGHT_TO_DAY
     select('#message').class('black')
+    select('#despertar').class('word')
+    select('#dormir').class('word underlined')
   })
-
+  
   select('#dormir').mouseClicked(() => {
     if (state != State.NIGHT) soundWoosh.play()
     state = State.DAY_TO_NIGHT
     select('#message').class('white')
+    select('#despertar').class('word underlined')
+    select('#dormir').class('word')
   })
 }
 
