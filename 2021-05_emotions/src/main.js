@@ -44,10 +44,10 @@ function draw() {
     // tint(0, 0, 100, value * 4)
 
     let l = value * width * 0.7
-    image(faces[i], cumulative * width + value * width / 2, height / 2 + value * width * 0.02, l, l)
+    // image(faces[i], cumulative * width + value * width / 2, height / 2 + value * width * 0.02, l, l)
   }
 }
 
-// function windowResized() {
-//   resizeCanvas(windowWidth, windowHeight)
-// }
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight)
+}
