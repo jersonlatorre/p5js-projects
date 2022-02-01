@@ -5,10 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.js"></script>
-  <script src="main.js"></script>
-  <script src="poisson-disk-sampling.js"></script>
   <title></title>
   <style>
     html,
@@ -24,12 +20,19 @@
     }
 
     canvas {
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1)
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      z-index: 0;
     }
   </style>
 </head>
 
 <body>
+  <div id="p5js"></div>
+  <div id="container"></div>
 </body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+<script src="src/main.js"></script>
+<script src="src/tracer.js"></script>
 
 </html>

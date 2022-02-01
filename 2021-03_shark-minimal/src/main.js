@@ -31,9 +31,9 @@ function draw() {
   fill('black')
   circle(Global.target.x, Global.target.y, Global.targetSize)
   noFill()
-  stroke('white')
-  strokeWeight(7.5)
-  circle(Global.target.x, Global.target.y, Global.targetSize * 0.68)
+  // stroke('white')
+  // strokeWeight(7.5)
+  // circle(Global.target.x, Global.target.y, Global.targetSize * 0.68)
   
   fill('white')
   textSize(50)
