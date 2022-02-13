@@ -1,11 +1,11 @@
 let resolution
 let simplex
-let tileSize = 30
-let timer = 0
+let timer
 
-let offsetSpeed = -0.15
-let noiseSpeed = 0.1
-let noiseFactor = 0.5
+let tileSize = 30
+let offsetSpeed = 0
+let noiseSpeed = 0.05
+let noiseFactor = 0.9
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
@@ -13,6 +13,7 @@ function setup() {
 
   resolution = { width: (width / tileSize) | 0, height: (height / tileSize) | 0 }
   simplex = new SimplexNoise(0, 2, 0.5)
+  timer = 0
 
   dots = []
   for (let i = 0; i <= resolution.width; i++) {
@@ -23,11 +24,11 @@ function setup() {
 function draw() {
   background('black')
   calculateValues()
-  drawCircles(0.4)
+  // drawCircles(0.7)
 
-  let minUmbral = 0.4
-  let maxUmbral = 0.8
-  let numLayers = 7
+  let minUmbral = 0.2
+  let maxUmbral = 0.9
+  let numLayers = 10
   let minColor = color(0, 100, 100)
   let maxColor = color(359, 100, 100)
 
@@ -46,17 +47,17 @@ function draw() {
 }
 
 function calculateValues() {
-  timer += 0.03
+  // timer += 0.03
   timer += deltaTime * 0.001
   let offset = offsetSpeed * timer
-  let f = noiseFactor * tileSize * 0.003
+  let f = 1 / noiseFactor * tileSize * 0.003
 
   for (let i = 0; i <= resolution.width; i++) {
     for (let j = 0; j <= resolution.height; j++) {
       let u = i * f
       let v = j * f + offset
       let n = simplex.noise(u, v, timer * noiseSpeed)
-      
+
       dots[i][j] = n
     }
   }
@@ -183,9 +184,16 @@ function drawMarchingSquares(umbral, color) {
 }
 
 function drawLine(p1, p2, color) {
-  strokeWeight(3)
-  stroke(color)
+  // strokeWeight(5)
+  // stroke(color)
+  stroke('white')
+  strokeWeight(1)
   line(p1.x, p1.y, p2.x, p2.y)
+
+  noStroke()
+  fill(color)
+  let m = p5.Vector.lerp(p1, p2, 0.5)
+  circle(m.x + random(-1.5, 1.5), m.y + random(-1.5, 1.5), 8)
 }
 
 function drawCircles(umbral) {

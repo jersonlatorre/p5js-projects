@@ -25,7 +25,7 @@ function draw() {
   drawCircles(0.5)
 
   let minUmbral = 0.1
-  let maxUmbral = 0.8
+  let maxUmbral = 0.5
   let numLayers = 5
   let minColor = color(0, 100, 100)
   let maxColor = color(359, 100, 100)
