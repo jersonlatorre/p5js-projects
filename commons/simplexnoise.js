@@ -1,7 +1,6 @@
 class SimplexNoise {
   constructor(seed, octaves, persistence) {
     this.rootSeed = seed || 0
-    console.log(this.rootSeed)
     this.iOctaves = octaves || 1
     this.fPersistence = persistence || 0.5
     this.fResult
