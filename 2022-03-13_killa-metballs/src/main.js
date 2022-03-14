@@ -1,9 +1,9 @@
 window.onload = function() {
 	let div = document.querySelector('#metaballs')
-	let backgroundColor = [ 162, 210, 255 ]
-	let color1 = [ 254, 249, 239 ]
-	let color2 = [ 255, 134, 94 ]
-	let color3 = [ 254, 228, 64 ]
+	let backgroundColor = [ 255, 255, 255 ]
+	let color1 = [ 200, 200, 200 ]
+	let color2 = [ 155, 155, 155 ]
+	let color3 = [ 96, 96, 96 ]
 
 	new MetaBalls(
 		div,
