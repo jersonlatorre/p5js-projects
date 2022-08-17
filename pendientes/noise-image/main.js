@@ -6,6 +6,8 @@ let simplex
 let dmouseX = 0
 let dmouseY = 0
 let factor = 0
+let offset = 0
+let letters = ['!', '*', '?', '.', ':', ';', '-', '_', '+', '=', '@', '#', '$', '%', '^', '&', '~', '`', '|', '/', '"', '<', '>', '{', '}', '[', ']', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 function setup() {
 	createCanvas(windowWidth, windowHeight)
@@ -23,6 +25,10 @@ function draw() {
 	image(canvas1, 0, 0, windowWidth, windowHeight)
 	generateMask()
 
+	if (frameCount % 5 == 0) {
+		offset++
+	}
+
 	let masked = canvas2.get()
 	masked.mask(mask)
 	image(masked, 0, 0, windowWidth, windowHeight)
@@ -37,7 +43,7 @@ function draw() {
 }
 
 function generateCanvas1() {
-	canvas1.background('#f0f0f0')
+	canvas1.background('#ddd')
 	canvas1.noStroke()
 	canvas1.fill('white')
 	let size = min(canvas1.width, canvas1.height) * 0.9
@@ -74,7 +80,7 @@ function generateMask() {
 			mask.fill(255, v * 255)
 			mask.textSize(20)
 			mask.textAlign(CENTER, CENTER)
-			mask.text(random([ 'c', 'o', 'd', 'e' ]), x, y)
+			mask.text(letters[(i * j + offset) % (letters.length)], x, y)
 		}
 	}
 }
