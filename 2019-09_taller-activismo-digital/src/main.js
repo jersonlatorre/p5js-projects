@@ -30,14 +30,14 @@ let nextColor = 0
 let simplex
 
 function preload() {
-	blanco = loadImage('shapes/a.svg')
-	negro = loadImage('shapes/b.svg')
-	puntero = loadImage('shapes/puntero.svg')
+	blanco = loadImage('assets/shapes/a.svg')
+	negro = loadImage('assets/shapes/b.svg')
+	puntero = loadImage('assets/shapes/puntero.svg')
 
-	loadJSON('frames.json', (frames) => {
+	loadJSON('assets/frames.json', (frames) => {
 		images = new Array(frames.length)
 		frames.forEach((frame, index) => {
-			loadImage('frames/' + frame.nombre, (image) => {
+			loadImage('assets/frames/' + frame.nombre, (image) => {
 				let array = []
 				for (let i = 0; i < W; i++) {
 					array.push([])
