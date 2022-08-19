@@ -17,7 +17,7 @@ function preload() {
 
 function setup() {
   createCanvas(800, 800)
-  imageMode(CENTER, CENTER)
+  imageMode(CENTER)
 }
 
 function draw() {
