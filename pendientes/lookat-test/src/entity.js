@@ -25,6 +25,5 @@ class Entity {
 		line(-cell_size * 0.2 * factor, 0, cell_size * 0.2 * factor, 0)
 		// ----------------
 		pop()
-		console.log('hola')
 	}
 }

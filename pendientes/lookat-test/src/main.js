@@ -22,9 +22,7 @@ function draw() {
 	background('black')
 	mouseSmoothX = lerp(mouseSmoothX, mouseX, 0.06)
 	mouseSmoothY = lerp(mouseSmoothY, mouseY, 0.06)
-	// console.log(mouseSmoothX, mouseSmoothY)
 	fill('red')
-	// circle(mouseSmoothX, mouseSmoothY, 30)
 	entities.forEach(entity => {
 		entity.draw()
 	})
