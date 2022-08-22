@@ -15,7 +15,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowHeight, windowHeight)
+  createCanvas(windowWidth, windowHeight)
   multinoise = new Multinoise()
 }
 

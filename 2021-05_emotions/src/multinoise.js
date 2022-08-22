@@ -2,7 +2,7 @@ class Multinoise {
   constructor(count) {
     this.simplex = new SimplexNoise()
   }
-  
+
   get(t, c) {
     let count = c
     let raws = []
