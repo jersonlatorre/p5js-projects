@@ -12,9 +12,9 @@ let word = 'infinite     '
 let gota
 
 function preload() {
-  font = loadFont('cocogoose.ttf')
-  // gota = loadSound('gota.wav')
-  gota = loadSound('click.wav')
+  font = loadFont('assets/cocogoose.ttf')
+  gota = loadSound('assets/gota.wav')
+  // gota = loadSound('assets/click.wav')
 }
 
 function setup() {
