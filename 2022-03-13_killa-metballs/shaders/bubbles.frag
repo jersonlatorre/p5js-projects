@@ -54,56 +54,56 @@ uniform float radius9;
 uniform float opacity;
 
 float Sphere(vec2 uv, vec2 position, float radius) {
-  float dist = radius / distance(uv, position);
-  return dist * dist;
+	float dist = radius / distance(uv, position);
+	return dist * dist;
 }
 
 vec4 blend(vec4 source, vec4 destination) {
-  float alpha = source.a + destination.a * (1.0 - source.a);
-  vec3 rgb = (source.rgb * source.a + destination.rgb * (1.0 - source.a)) / alpha;
-  return vec4(rgb, alpha);
+	float alpha = source.a + destination.a * (1.0 - source.a);
+	vec3 rgb = (source.rgb * source.a + destination.rgb * (1.0 - source.a)) / alpha;
+	return vec4(rgb, alpha);
 }
 
 void main() {
-  vec2 uv = gl_FragCoord.xy / iResolution.y;
-  vec4 backgroundColor = vec4(backgroundColorR, backgroundColorG, backgroundColorB, 1.0);
+	vec2 uv = gl_FragCoord.xy / iResolution.y;
+	vec4 backgroundColor = vec4(backgroundColorR, backgroundColorG, backgroundColorB, 1.0);
 
     // front value
-  float frontValue = 0.0;
-  frontValue += Sphere(uv, frontPosition0, radius0);
-  frontValue += Sphere(uv, frontPosition1, radius1);
-  frontValue += Sphere(uv, frontPosition2, radius2);
-  frontValue += Sphere(uv, frontPosition3, radius3);
-  frontValue += Sphere(uv, frontPosition4, radius4);
-  frontValue += Sphere(uv, frontPosition5, radius5);
-  frontValue += Sphere(uv, frontPosition6, radius6);
-  frontValue += Sphere(uv, frontPosition7, radius7);
-  frontValue += Sphere(uv, frontPosition8, radius8);
-  frontValue += Sphere(uv, frontPosition9, radius9);
-  frontValue = smoothstep(0.5, 0.501, frontValue);
+	float frontValue = 0.0;
+	frontValue += Sphere(uv, frontPosition0, radius0);
+	frontValue += Sphere(uv, frontPosition1, radius1);
+	frontValue += Sphere(uv, frontPosition2, radius2);
+	frontValue += Sphere(uv, frontPosition3, radius3);
+	frontValue += Sphere(uv, frontPosition4, radius4);
+	frontValue += Sphere(uv, frontPosition5, radius5);
+	frontValue += Sphere(uv, frontPosition6, radius6);
+	frontValue += Sphere(uv, frontPosition7, radius7);
+	frontValue += Sphere(uv, frontPosition8, radius8);
+	frontValue += Sphere(uv, frontPosition9, radius9);
+	frontValue = smoothstep(0.5, 0.501, frontValue);
 
     // back value
-  float backValue = 0.0;
-  backValue += Sphere(uv, backPosition0, radius0);
-  backValue += Sphere(uv, backPosition1, radius1);
-  backValue += Sphere(uv, backPosition2, radius2);
-  backValue += Sphere(uv, backPosition3, radius3);
-  backValue += Sphere(uv, backPosition4, radius4);
-  backValue += Sphere(uv, backPosition5, radius5);
-  backValue += Sphere(uv, backPosition6, radius6);
-  backValue += Sphere(uv, backPosition7, radius7);
-  backValue += Sphere(uv, backPosition8, radius8);
-  backValue += Sphere(uv, backPosition9, radius9);
-  backValue = smoothstep(0.5, 0.501, backValue);
+	float backValue = 0.0;
+	backValue += Sphere(uv, backPosition0, radius0);
+	backValue += Sphere(uv, backPosition1, radius1);
+	backValue += Sphere(uv, backPosition2, radius2);
+	backValue += Sphere(uv, backPosition3, radius3);
+	backValue += Sphere(uv, backPosition4, radius4);
+	backValue += Sphere(uv, backPosition5, radius5);
+	backValue += Sphere(uv, backPosition6, radius6);
+	backValue += Sphere(uv, backPosition7, radius7);
+	backValue += Sphere(uv, backPosition8, radius8);
+	backValue += Sphere(uv, backPosition9, radius9);
+	backValue = smoothstep(0.5, 0.501, backValue);
 
     // colors calculation
-  vec4 front = vec4(colorFrontR, colorFrontG, colorFrontB, frontValue * opacity);
-  vec4 back = vec4(colorBackR, colorBackG, colorBackB, backValue * 1.0);
+	vec4 front = vec4(colorFrontR, colorFrontG, colorFrontB, frontValue * opacity);
+	vec4 back = vec4(colorBackR, colorBackG, colorBackB, backValue * 1.0);
 
     // blending
-  vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
-  color = blend(back, backgroundColor);
-  color = blend(front, color);
+	vec4 color = vec4(0.0, 0.0, 0.0, 0.0);
+	color = blend(back, backgroundColor);
+	color = blend(front, color);
 
-  gl_FragColor = color;
+	gl_FragColor = color;
 }
