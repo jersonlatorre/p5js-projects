@@ -6,7 +6,7 @@ class Repulsor {
     this.position = createVector(x, y)
     this.angle = fxrandomAngle()
     this.size = fxrandom(3, 5)
-    this.alpha = fxrandom(80, 255)
+    this.alpha = map(this.size, 3, 5, 20, 200)
   }
 
   draw(graphics) {
