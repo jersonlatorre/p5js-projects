@@ -14,10 +14,8 @@ class Sketch3 {
     graphics.clear()
     graphics.translate(-540, -540)
     graphics.background(255)
-    // translate(-width / 2, -height / 2)
     graphics.drawingContext.enable(graphics.drawingContext.BLEND)
     graphics.blendMode(MULTIPLY)
-    // blendMode(ADD)
 
     this.lineDrawers.forEach((lineDrawer) => {
       lineDrawer.draw(graphics)
@@ -25,7 +23,6 @@ class Sketch3 {
 
     this.dots.forEach((dot) => {
       dot.draw(graphics)
-      // graphics.circle(dot.position.x, dot.position.y, 10)
     })
 
     if (this.isDrawingFinished()) {
