@@ -48,7 +48,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(600, 600, WEBGL)
+  createCanvas(800, 800, WEBGL)
 
   delayedMouseX = width / 2
   delayedMouseY = height / 2
@@ -85,8 +85,8 @@ function setup() {
   vertSource = resolveLygia(vertSource)
   fragSource = resolveLygia(fragSource)
   effectShader = createShader(vertSource, fragSource)
-  buffer = createGraphics(600, 600)
-  buffer.image(img, 0, 0, 600, 600)
+  buffer = createGraphics(800, 800)
+  buffer.image(img, 0, 0, 800, 800)
 }
 
 function draw() {
