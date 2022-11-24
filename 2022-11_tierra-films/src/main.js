@@ -7,29 +7,29 @@ let img
 let delayedMouseX
 let delayedMouseY
 
-const MIN_RADIUS = 0.01
+const MIN_RADIUS = 0.1
 const MAX_RADIUS = 0.5
-const DEFAULT_RADIUS = 0.18
+const DEFAULT_RADIUS = 0.15
 
 const MIN_SMOOTH = 0.1
 const MAX_SMOOTH = 1.0
-const DEFAULT_SMOOTH = 0.7
+const DEFAULT_SMOOTH = 0.8
 
-const MIN_GRAIN = 0.01
-const MAX_GRAIN = 0.1
-const DEFAULT_GRAIN = 0.05
+const MIN_GRAIN = 0.1
+const MAX_GRAIN = 0.5
+const DEFAULT_GRAIN = 0.4
 
 const MIN_SPEED = 0.0
 const MAX_SPEED = 2.0
-const DEFAULT_SPEED = 0.7
+const DEFAULT_SPEED = 0.6
 
 const MIN_AMOUNT = 0.1
 const MAX_AMOUNT = 1.0
-const DEFAULT_AMOUNT = 0.3
+const DEFAULT_AMOUNT = 0.6
 
 const MIN_DETAIL = 2.0
-const MAX_DETAIL = 20.0
-const DEFAULT_DETAIL = 7.0
+const MAX_DETAIL = 8.0
+const DEFAULT_DETAIL = 3.0
 
 let pane
 let params = {
@@ -42,8 +42,8 @@ let params = {
 }
 
 function preload() {
-  vertSource = loadStrings('shaders/test.vert')
-  fragSource = loadStrings('shaders/test.frag')
+  vertSource = loadStrings('shaders/effect.vert')
+  fragSource = loadStrings('shaders/effect.frag')
   img = loadImage('assets/logo.png')
 }
 
@@ -99,7 +99,7 @@ function draw() {
   time += deltaTime * 0.001
 
   shader(effectShader)
-  
+
   // shader params
   effectShader.setUniform('iTexture', buffer)
   effectShader.setUniform('iTime', time)
