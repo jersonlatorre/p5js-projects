@@ -1,15 +1,16 @@
-let vertSource
-let fragSource
-let effectShader
-let buffer
-let time = 0
-let img
-let delayedMouseX
-let delayedMouseY
+let vertSource, fragSource
+let effectShader, buffer, img
+let time = 0,
+  mX = 0,
+  mY = 0
+let canvas,
+  angle = Math.PI / 2,
+  radius = 310,
+  timer
 
 const MIN_RADIUS = 0.1
 const MAX_RADIUS = 0.5
-const DEFAULT_RADIUS = 0.15
+const DEFAULT_RADIUS = 0.23
 
 const MIN_SMOOTH = 0.1
 const MAX_SMOOTH = 1.0
@@ -21,15 +22,21 @@ const DEFAULT_GRAIN = 0.4
 
 const MIN_SPEED = 0.0
 const MAX_SPEED = 2.0
-const DEFAULT_SPEED = 0.6
+const DEFAULT_SPEED = 0.0
 
 const MIN_AMOUNT = 0.1
 const MAX_AMOUNT = 1.0
-const DEFAULT_AMOUNT = 0.6
+const DEFAULT_AMOUNT = 0.4
 
 const MIN_DETAIL = 2.0
 const MAX_DETAIL = 8.0
-const DEFAULT_DETAIL = 3.0
+const DEFAULT_DETAIL = 8.0
+
+const cx1 = 190
+const cy1 = 35
+
+const cx2 = 610
+const cy2 = 35
 
 let pane
 let params = {
@@ -48,14 +55,14 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(800, 800, WEBGL)
-
-  delayedMouseX = width / 2
-  delayedMouseY = height / 2
+  createCanvas(800, 800)
+  canvas = createGraphics(800, 800, WEBGL)
 
   pane = new Tweakpane.Pane({
     title: 'parámetros',
   })
+
+  noCursor()
 
   pane.addInput(params, 'radius', { label: 'tamaño', min: MIN_RADIUS, max: MAX_RADIUS, step: 0.01 })
   pane.addInput(params, 'smooth', { label: 'difuminado', min: MIN_SMOOTH, max: MAX_SMOOTH, step: 0.1 })
@@ -84,27 +91,30 @@ function setup() {
 
   vertSource = resolveLygia(vertSource)
   fragSource = resolveLygia(fragSource)
-  effectShader = createShader(vertSource, fragSource)
+  effectShader = canvas.createShader(vertSource, fragSource)
   buffer = createGraphics(800, 800)
   buffer.image(img, 0, 0, 800, 800)
 }
 
 function draw() {
-  background('white')
-  noStroke()
-  rect(-width / 2, -height / 2, width, height)
+  canvas.background('white')
+  canvas.rect(-width / 2, -height / 2, width, height)
 
-  delayedMouseX += (mouseX - delayedMouseX) * 0.08
-  delayedMouseY += (mouseY - delayedMouseY) * 0.08
-  time += deltaTime * 0.001
+  // mX = radius * cos(angle) + cx2
+  // mY = radius * sin(angle) + cy2
+  // angle -= deltaTime * 0.0006
+  // if (angle > PI) angle = 0.5
 
-  shader(effectShader)
+  mX += (mouseX - mX) * 0.2
+  mY += (mouseY - mY) * 0.2
+
+  canvas.shader(effectShader)
 
   // shader params
   effectShader.setUniform('iTexture', buffer)
   effectShader.setUniform('iTime', time)
   effectShader.setUniform('iResolution', [width, height])
-  effectShader.setUniform('iMouse', [delayedMouseX, delayedMouseY])
+  effectShader.setUniform('iMouse', [mX, mY])
 
   // pane params
   effectShader.setUniform('radius', params.radius)
@@ -113,4 +123,10 @@ function draw() {
   effectShader.setUniform('speed', params.speed)
   effectShader.setUniform('amount', params.amount)
   effectShader.setUniform('detail', params.detail)
+
+  image(canvas, 0, 0)
+  noStroke()
+  fill(0)
+  // circle(mX, mY, 10)
+  // console.log(angle)
 }

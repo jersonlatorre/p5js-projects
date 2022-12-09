@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+  <script src="src/main.js"></script>
+  <title></title>
+  <style>
+    @font-face {
+      font-family: MBCorpoSText-CondBold;
+      src: url("assets/MBCorpoSText-CondBold.otf") format("opentype");
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #00ff00;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    #container {
+      width: 600px;
+      height: 600px;
+      font-family: 'MBCorpoSText-CondBold', Courier, monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #symbol {
+      display: inline-block;
+      font-size: 50px;
+    }
+
+    #number {
+      display: inline-block;
+      font-size: 100px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="p5_loading" class="loadingclass">&nbsp;</div>
+  <div id="container">
+    <div>
+      <div id="symbol">S/</div>
+      <div id="number">0</div>
+    </div>
+  </div>
+</body>
+
+</html>
