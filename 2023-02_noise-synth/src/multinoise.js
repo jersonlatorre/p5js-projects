@@ -1,5 +1,5 @@
 class Multinoise {
-  constructor(count) {
+  constructor() {
     this.simplex = new SimplexNoise()
   }
 
