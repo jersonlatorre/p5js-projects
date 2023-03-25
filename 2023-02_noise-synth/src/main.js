@@ -4,7 +4,6 @@ let N = 5
 let colors = ['#70d6ff', '#ff70a6', '#ff9770', '#ffd670', '#89ED8D', '#70d6ff', '#ff70a6', '#ff9770', '#ffd670', '#89ED8D']
 let font
 let synth
-// let notes = []
 let chars = 'noisesynth'
 let v
 let currentNote
