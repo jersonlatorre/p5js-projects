@@ -1,5 +1,5 @@
 class FullscreenWebcam {
-  constructor(graphics) {
+  constructor() {
     this.webcam = createCapture(VIDEO)
     this.webcam.hide()
     this.graphics = createGraphics(windowWidth, windowHeight)
