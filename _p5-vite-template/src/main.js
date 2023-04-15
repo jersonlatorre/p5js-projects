@@ -1,11 +1,13 @@
-import p5 from 'p5'
+import p from '../lib/p5'
+import Sketch from './sketch'
 
-new p5((p) => {
-  p.setup = () => {
-    p.createCanvas(600, 600)
-  }
+let sketch
 
-  p.draw = () => {
-    p.background('blue')
-  }
-})
+p.setup = () => {
+  p.createCanvas(600, 600)
+  sketch = new Sketch()
+}
+
+p.draw = () => {
+  sketch.draw()
+}
