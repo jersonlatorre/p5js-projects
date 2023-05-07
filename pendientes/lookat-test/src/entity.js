@@ -4,7 +4,6 @@ class Entity {
 	}
 	draw() {
 		let distance = dist(mouseSmoothX, mouseSmoothY, this.position.x, this.position.y)
-		fill('red')
 		noStroke()
 		let angle = map(distance, 0, diagonal, 2 * PI, 0)
 		angle = atan2(mouseSmoothY - this.position.y, mouseSmoothX - this.position.x)
@@ -17,7 +16,7 @@ class Entity {
 		// strokeWeight(weight)
 		// stroke('rgba(255, 255, 255, 0.5)')
 		// line(-size, 0, size, 0)
-		fill('white')
+		fill('#151515')
 		noStroke()
 		circle(0, 0, cell_size * factor * 0.9)
 		stroke('black')

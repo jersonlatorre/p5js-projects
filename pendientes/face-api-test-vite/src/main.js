@@ -11,19 +11,43 @@ new p5((p) => {
 
   p.setup = () => {
     p.createCanvas(640, 480)
-    video = p.createCapture(p.VIDEO, onVideoCreated)
-    video.size(p.width, p.height)
-    video.hide()
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      console.log(devices)
+      const deviceId = devices.find(
+        (device) =>
+          device.kind === 'videoinput' && device.label === 'Cámara FaceTime HD (1C1C:B782)'
+      ).deviceId
+      video = p.createCapture(
+        {
+          audio: false,
+          video: {
+            deviceId: deviceId,
+          },
+        },
+        onVideoCreated
+      )
+      video.size(p.width, p.height)
+      video.hide()
+    })
+    
     p.textAlign(p.CENTER, p.TOP)
   }
 
   function onVideoCreated() {
     console.log('video created')
     Promise.all([
-      faceapi.nets.tinyFaceDetector.loadFromUri('weights/tiny_face_detector_model-weights_manifest.json'),
-      faceapi.nets.faceLandmark68Net.loadFromUri('weights/face_landmark_68_model-weights_manifest.json'),
-      faceapi.nets.ssdMobilenetv1.loadFromUri('/weights/ssd_mobilenetv1_model-weights_manifest.json'),
-      faceapi.nets.faceRecognitionNet.loadFromUri('/weights/face_recognition_model-weights_manifest.json'),
+      faceapi.nets.tinyFaceDetector.loadFromUri(
+        'weights/tiny_face_detector_model-weights_manifest.json'
+      ),
+      faceapi.nets.faceLandmark68Net.loadFromUri(
+        'weights/face_landmark_68_model-weights_manifest.json'
+      ),
+      faceapi.nets.ssdMobilenetv1.loadFromUri(
+        '/weights/ssd_mobilenetv1_model-weights_manifest.json'
+      ),
+      faceapi.nets.faceRecognitionNet.loadFromUri(
+        '/weights/face_recognition_model-weights_manifest.json'
+      ),
     ])
       .then(() => {
         console.log('model loaded')
@@ -33,7 +57,10 @@ new p5((p) => {
   }
 
   async function readData() {
-    let faceDetection = await faceapi.detectSingleFace(video.elt).withFaceLandmarks().withFaceDescriptor()
+    let faceDetection = await faceapi
+      .detectSingleFace(video.elt)
+      .withFaceLandmarks()
+      .withFaceDescriptor()
     if (faceDetection) {
       targetDescriptor = normalize(faceDetection.descriptor)
       // let data = [targetDescriptor]
@@ -142,7 +169,13 @@ new p5((p) => {
   }
 
   // get color from parameter
-  let colormap = ['rgb(0, 0, 15)', 'rgb(32, 0, 140)', 'rgb(204, 0, 119)', 'rgb(255, 215, 0)', 'rgb(255, 255,255)']
+  let colormap = [
+    'rgb(0, 0, 15)',
+    'rgb(32, 0, 140)',
+    'rgb(204, 0, 119)',
+    'rgb(255, 215, 0)',
+    'rgb(255, 255,255)',
+  ]
   function getColor(t) {
     var n = colormap.length - 1
     var i = Math.floor(t * n)

@@ -1,0 +1,23 @@
+{
+  "name": "p5",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "alea": "^1.0.1",
+    "animejs": "^3.2.1",
+    "delaunator": "^5.0.0",
+    "p5": "^1.4.2",
+    "p5-sketch": "^1.0.1",
+    "poisson-disk-sampling": "^2.3.1",
+    "simplex-noise": "^4.0.1"
+  }
+}

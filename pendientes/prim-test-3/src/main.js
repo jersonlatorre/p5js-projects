@@ -6,7 +6,7 @@ function setup() {
   w = min(windowWidth, windowHeight)
   createCanvas(w, w)
   // noiseSeed(fxrandom(0, 1000000))
-  graphics = createGraphics(1080, 1080, WEBGL)
+  graphics = createGraphics(600, 600, WEBGL)
   sketch = new Sketch3()
 }
 

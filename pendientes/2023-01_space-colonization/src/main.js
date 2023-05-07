@@ -137,8 +137,9 @@ class Tree {
         branch.thickness = 0
         let node = branch
         while (node.parent) {
-          node.parent.thickness = node.thickness + 0.05
-          node.parent.thickness = p.constrain(node.parent.thickness, 0, 5)
+          node.parent.thickness = 1
+          // node.parent.thickness = node.thickness + 0.05
+          // node.parent.thickness = p.constrain(node.parent.thickness, 0, 5)
           node = node.parent
         }
       }
