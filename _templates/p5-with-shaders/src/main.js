@@ -1,15 +1,15 @@
 let theFilter
 
 function preload() {
-  theFilter = loadShader('src/filter.vert', 'src/filter.frag')
+  theFilter = loadShader('shaders/filter.vert', 'shaders/filter.frag')
 }
 
 function setup() {
   createCanvas(600, 600)
-  game = new Game()
 }
 
 function draw() {
-  game.draw()
+  background('blue')
+  circle(300, 300, 200)
   filterShader(theFilter)
 }

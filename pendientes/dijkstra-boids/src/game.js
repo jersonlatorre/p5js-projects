@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     Global.game = this
-    this.tiles = generateMaze(61)
+    this.tiles = generateMaze(21)
     this.adjacencyMatrix = Pathfinding.getAdjacencyMatrixFromMap(this.tiles)
     Global.tileSize = width / this.tiles.length
     Global.npcs = Array.from({ length: 10 }, () => new Npc())

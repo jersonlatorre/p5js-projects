@@ -11,12 +11,12 @@ const COLORS = [
   '#F5EFE7', // blanco
 ]
 
-const CHANGE_DISTANCE = 20
-const WANDER_STRENGTH = 5
+const CHANGE_DISTANCE = 100
+const WANDER_STRENGTH = 1
 const MAX_STEER = 10
 const MAX_SPEED = 5
 const WANDERED = true
-const SEPARATED = false
+const SEPARATED = true
 
 class NpcStateMove {
   constructor(parent) {
