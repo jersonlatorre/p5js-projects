@@ -11,20 +11,20 @@ const COLORS = [
   '#F5EFE7', // blanco
 ]
 
-const NUM_DIVISIONS = 8
+const NUM_DIVISIONS = 9
 const NUM_POLYLINES = 50
 const NOISE_FACTOR = 0.002
 
 function setup() {
-  createCanvas(800, 800)
+  createCanvas(1080, 1920)
   // colorMode(HSL)
-  // frameRate(5)
+  frameRate(10)
 }
 
 function addPolyline() {
   let polyline = []
-  polyline.push({ x: random(width), y: random(width) })
-  polyline.push({ x: random(width), y: random(width) })
+  polyline.push({ x: random(width), y: random(height) })
+  polyline.push({ x: random(width), y: random(height) })
 
   for (let i = 1; i <= NUM_DIVISIONS; i++) {
     polyline = divide(polyline, i)
@@ -47,7 +47,7 @@ function divide(polyline, n) {
     let normalVector = createVector(-segmentVector.y, segmentVector.x)
     normalVector.normalize()
 
-    let o = map(n, 0, NUM_DIVISIONS, 0, 80)
+    let o = map(n, 0, NUM_DIVISIONS, 0, 120)
     let h = map(
       simplex.noise(midX * NOISE_FACTOR, midY * NOISE_FACTOR, millis() / 1500),
       0,
@@ -66,9 +66,12 @@ function divide(polyline, n) {
 }
 
 function draw() {
-  blendMode(BLEND)
-  background('#101010')
+  // blendMode(BLEND)
+  // background('#101010')
   // background('#F5EFE7')
+  fill(0, 30)
+  rect(0, 0, width, height)
+
 
 
   polylines = []
@@ -83,7 +86,7 @@ function draw() {
     strokeWeight(1)
     noFill()
     for (let point of polyline.data) {
-      curveVertex(point.x, point.y)
+      vertex(point.x, point.y)
     }
     endShape()
   }

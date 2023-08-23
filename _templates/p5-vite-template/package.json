@@ -16,7 +16,7 @@
     "animejs": "^3.2.1",
     "delaunator": "^5.0.0",
     "p5": "^1.4.2",
-    "p5-sketch": "^1.0.1",
+    "p5-sketch": "^1.1.0",
     "poisson-disk-sampling": "^2.3.1",
     "simplex-noise": "^4.0.1"
   }
