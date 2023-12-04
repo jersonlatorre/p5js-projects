@@ -6,14 +6,18 @@ function setup() {
 
   cities = new PoissonDiskSampling({
     shape: [600, 600],
-    minDistance: 10,
-    maxDistance: 10,
+    minDistance: 6,
+    maxDistance: 30,
+    distanceFunction: (p) => {
+      // return dist(p[0], p[1], 300, 300) / 800
+      return p[1] / 600
+    }
   })
     .fill()
     .map((p) => createVector(p[0], p[1]))
-    .filter((p) => {
-      return dist(p.x, p.y, 300, 300) < 250
-    })
+    // .filter((p) => {
+    //   return dist(p.x, p.y, 300, 300) < 250
+    // })
 
   bestPath = nearestNeighbor(cities.slice())
   bestPath = twoOpt(bestPath)
@@ -25,12 +29,12 @@ function draw() {
   strokeWeight(2)
   noFill()
 
-  for (let i = 0; i < bestPath.length - 1; i++) {
-    let n = noise(bestPath[i].x * 0.01, bestPath[i].y * 0.01)
-    let w = map(n, 0, 1, 0, 6)
-    strokeWeight(w)
-    line(bestPath[i].x, bestPath[i].y, bestPath[i + 1].x, bestPath[i + 1].y)
-  }
+  // for (let i = 0; i < bestPath.length - 1; i++) {
+  //   let n = noise(bestPath[i].x * 0.01, bestPath[i].y * 0.01)
+  //   let w = map(n, 0, 1, 0, 6)
+  //   strokeWeight(w)
+  //   line(bestPath[i].x, bestPath[i].y, bestPath[i + 1].x, bestPath[i + 1].y)
+  // }
 
   // beginShape()
   // for (let point of bestPath) {
@@ -39,8 +43,11 @@ function draw() {
   // endShape()
 
   for (let city of cities) {
-    // circle(city.x, city.y, 5)
+    strokeWeight(1)
+    circle(city.x, city.y, city.y * 0.04)
   }
+
+  noLoop()
 }
 
 function twoOpt(path) {

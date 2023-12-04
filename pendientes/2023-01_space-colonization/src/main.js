@@ -1,6 +1,6 @@
-import p5 from 'p5'
-import PoissonDiskSampling from 'poisson-disk-sampling'
 import KDBush from 'kdbush'
+import PoissonDiskSampling from 'poisson-disk-sampling'
+import p5 from 'p5'
 
 class Leaf {
   constructor(p, position) {
@@ -66,7 +66,7 @@ class Tree {
     this.index = null
 
     let pds = new PoissonDiskSampling({
-      shape: [400, 400],
+      shape: [600, 600],
       minDistance: 10,
       maxDistance: 10,
       tries: 10,
@@ -74,22 +74,16 @@ class Tree {
 
     let points = pds.fill()
     points.forEach((point) => {
-      let pointVector = p.createVector(point[0] + 100, point[1] + 100)
-      let center = p.createVector(300, 300)
-      let distance = pointVector.copy().sub(center).mag()
-      // if (distance < 200) {
-        this.leaves.push(new Leaf(p, pointVector))
-      // }
+      let pointVector = p.createVector(point[0], point[1])
+      this.leaves.push(new Leaf(p, pointVector))
     })
     console.log(this.leaves.length)
 
-    this.branches.push(new Branch(p, null, p.createVector(300, 300), p.createVector()))
-    this.branches.push(new Branch(p, null, p.createVector(300, 500), p.createVector()))
-    this.branches.push(new Branch(p, null, p.createVector(300, 100), p.createVector()))
-    this.branches.push(new Branch(p, null, p.createVector(100, 100), p.createVector()))
-    this.branches.push(new Branch(p, null, p.createVector(500, 100), p.createVector()))
-    this.branches.push(new Branch(p, null, p.createVector(100, 500), p.createVector()))
-    this.branches.push(new Branch(p, null, p.createVector(500, 500), p.createVector()))
+    for (let i = 0; i < 120; i++) {
+      this.branches.push(
+        new Branch(p, null, p.createVector(p.random(600), p.random(600)), p.createVector())
+      )
+    }
   }
 
   grow() {
@@ -108,12 +102,14 @@ class Tree {
       let closestBranch = null
       let minDistance = 99999999
 
-      let nearestBranches = index.within(leaf.position.x, leaf.position.y, 110).map((id) => this.branches[id])
+      let nearestBranches = index
+        .within(leaf.position.x, leaf.position.y, 110)
+        .map((id) => this.branches[id])
 
       for (let j = 0; j < nearestBranches.length; j++) {
         let branch = nearestBranches[j]
         let distance = p5.Vector.dist(branch.position, leaf.position)
-        if (distance < 4) {
+        if (distance < 5) {
           leaf.reached = true
         } else if (distance < minDistance) {
           closestBranch = branch

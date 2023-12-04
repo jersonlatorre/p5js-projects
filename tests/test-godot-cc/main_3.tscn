@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://58v5fex7a45g"]
+
+[ext_resource type="Script" path="res://geometry.gd" id="1_gf6ss"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vsnxn"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_wovd0"]
+sky_material = SubResource("ProceduralSkyMaterial_vsnxn")
+
+[sub_resource type="Environment" id="Environment_u53iv"]
+background_mode = 2
+sky = SubResource("Sky_wovd0")
+tonemap_mode = 2
+ssao_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jewi4"]
+metallic = 1.0
+roughness = 0.4
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_4fcyo"]
+
+[node name="Main3" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u53iv")
+
+[node name="Geometry" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_jewi4")
+mesh = SubResource("ImmediateMesh_4fcyo")
+script = ExtResource("1_gf6ss")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.85341)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.71372, 2.82934)

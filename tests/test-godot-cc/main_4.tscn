@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b3i3jogclbhk8"]
+
+[node name="Main4" type="Node2D"]
+
+[node name="GraphEdit" type="GraphEdit" parent="."]
+offset_left = 43.0
+offset_top = 59.0
+offset_right = 743.0
+offset_bottom = 760.0
+scroll_offset = Vector2(-272, -218)
+
+[node name="GraphNode" type="GraphNode" parent="GraphEdit"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 219.0
+offset_right = 342.0
+offset_bottom = 358.0
+mouse_filter = 1
+position_offset = Vector2(-175, 1)

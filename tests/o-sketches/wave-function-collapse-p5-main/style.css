@@ -1,0 +1,13 @@
+body {
+    background-color: #0f0f25;
+    overflow: hidden;
+}
+
+canvas {
+    z-index: -1;
+}
+
+* {
+    margin:0;
+    padding:0;
+}

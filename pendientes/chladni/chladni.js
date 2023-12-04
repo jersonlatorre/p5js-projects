@@ -16,7 +16,8 @@ const settings = {
 const pi = 3.1415926535
 
 // chladni 2D closed-form solution - returns between -1 and 1
-const chladni = (x, y, a, b, m, n) => a * sin(pi * n * x) * sin(pi * m * y) + b * sin(pi * m * x) * sin(pi * n * y)
+const chladni = (x, y, a, b, m, n) =>
+  a * sin(pi * n * x) * sin(pi * m * y) + b * sin(pi * m * x) * sin(pi * n * y)
 
 /* Initialization */
 
@@ -49,7 +50,7 @@ class Particle {
     this.y = random(0, 1)
     this.stochasticAmplitude
 
-    // this.color = [random(100,255), random(100,255), random(100,255)];
+    this.color = [random(100, 255), random(100, 255), random(100, 255)]
 
     this.updateOffsets()
   }
@@ -83,7 +84,8 @@ class Particle {
   }
 
   show() {
-    // stroke(...this.color);
+    noStroke()
+    stroke(...this.color)
     point(this.xOff, this.yOff)
   }
 }
