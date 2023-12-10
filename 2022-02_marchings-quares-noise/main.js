@@ -2,10 +2,10 @@ let resolution
 let simplex
 let timer
 
-let tileSize = 30
-let offsetSpeed = 0
-let noiseSpeed = 0.05
-let noiseFactor = 0.9
+let tileSize = 50
+let offsetSpeed = 0.3
+let noiseSpeed = 0.01
+let noiseFactor = 1
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
@@ -26,9 +26,9 @@ function draw() {
   calculateValues()
   // drawCircles(0.7)
 
-  let minUmbral = 0.2
-  let maxUmbral = 0.9
-  let numLayers = 10
+  let minUmbral = 0
+  let maxUmbral = 1
+  let numLayers = 8
   let minColor = color(0, 100, 100)
   let maxColor = color(359, 100, 100)
 

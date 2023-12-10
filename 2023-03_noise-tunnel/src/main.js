@@ -1,10 +1,4 @@
-let COLORS = [
-  '#ffd670', // amarillo
-  '#89ED8D', // verde
-  '#70d6ff', // celeste
-  '#ff70a6', // rosa
-  '#ff9770', // naranja
-]
+let COLORS = ['#FF5B65', '#FFA24B', '#FCDF5F', '#49D8EE', '#F5EFE7']
 
 const N_CIRCLES = 25
 const TUNNEL_SPEED = 0.35
@@ -168,8 +162,10 @@ class Handler {
 
         if (this.circleX < this.squareX) this.circleX = this.squareX
         if (this.circleY < this.squareY) this.circleY = this.squareY
-        if (this.circleX > this.squareX + this.squareWidth) this.circleX = this.squareX + this.squareWidth
-        if (this.circleY > this.squareY + this.squareWidth) this.circleY = this.squareY + this.squareWidth
+        if (this.circleX > this.squareX + this.squareWidth)
+          this.circleX = this.squareX + this.squareWidth
+        if (this.circleY > this.squareY + this.squareWidth)
+          this.circleY = this.squareY + this.squareWidth
 
         if (!mouseIsPressed) {
           this.state = HandlerState.IDLE

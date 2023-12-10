@@ -6,16 +6,19 @@ let lerpedGlobalScale = 1
 let lerpedGlobalX = 1
 let lerpedGlobalY = 1
 
-let colors = [ '#EF476F', '#FFD166', '#06D6A0', '#118AB2' ]
+let colors = ['#FF5B65', '#FFA24B', '#FCDF5F', '#49D8EE', '#F5EFE7']
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
   setAttributes('antialias', true)
   setAttributes('depth', true)
 
-  createButton('+').position(10, 10).size(50, 50).mousePressed(() => {
-    posts.push(new Post(random(-100, 100), random(-100, 100), random(colors), random(0.3, 3)))
-  })
+  createButton('+')
+    .position(10, 10)
+    .size(50, 50)
+    .mousePressed(() => {
+      posts.push(new Post(random(-100, 100), random(-100, 100), random(colors), random(0.3, 3)))
+    })
 
   for (let i = 0; i < 10; i++) {
     // posts.push(new Post(random(-100, 100), random(-100, 100), random(colors), random(0.3, 3)))
@@ -26,7 +29,7 @@ function setup() {
 }
 
 function draw() {
-  background(95)
+  background('#111')
   lerpedGlobalScale = lerp(lerpedGlobalScale, globalScale, 0.1)
   lerpedGlobalX = lerp(lerpedGlobalX, globalX, 0.2)
   lerpedGlobalY = lerp(lerpedGlobalY, globalY, 0.2)

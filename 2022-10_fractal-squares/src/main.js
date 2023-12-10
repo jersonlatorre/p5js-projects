@@ -1,4 +1,4 @@
-let colors = ['#70d6ff', '#ff70a6', '#ff9770', '#ffd670', '#89ED8D']
+let colors = ['#323232', '#FF5B65', '#FFA24B', '#FCDF5F', '#49D8EE', '#F5EFE7']
 let maxIndex
 
 function setup() {
@@ -38,10 +38,30 @@ function drawFractal(x, y, radius, index) {
   let offset = fxrandom(width * 0.2, width * 0.2)
   let factor = fxrandom(0.48, 0.52)
   index++
-  drawFractal(x - radius + fxrandom(-offset, offset), y + fxrandom(-offset, offset), radius * factor, index)
-  drawFractal(x + radius + fxrandom(-offset, offset), y + fxrandom(-offset, offset), radius * factor, index)
-  drawFractal(x + fxrandom(-offset, offset), y - radius + fxrandom(-offset, offset), radius * factor, index)
-  drawFractal(x + fxrandom(-offset, offset), y + radius + fxrandom(-offset, offset), radius * factor, index)
+  drawFractal(
+    x - radius + fxrandom(-offset, offset),
+    y + fxrandom(-offset, offset),
+    radius * factor,
+    index
+  )
+  drawFractal(
+    x + radius + fxrandom(-offset, offset),
+    y + fxrandom(-offset, offset),
+    radius * factor,
+    index
+  )
+  drawFractal(
+    x + fxrandom(-offset, offset),
+    y - radius + fxrandom(-offset, offset),
+    radius * factor,
+    index
+  )
+  drawFractal(
+    x + fxrandom(-offset, offset),
+    y + radius + fxrandom(-offset, offset),
+    radius * factor,
+    index
+  )
 
   noLoop()
 }

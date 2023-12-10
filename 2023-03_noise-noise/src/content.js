@@ -1,10 +1,4 @@
-let colors = [
-  '#ffd670', // amarillo
-  '#89ED8D', // verde
-  '#70d6ff', // celeste
-  '#ff70a6', // rosa
-  '#ff9770', // naranja
-]
+let colors = ['#323232', '#FF5B65', '#FFA24B', '#FCDF5F', '#49D8EE', '#F5EFE7']
 
 // let mx = 0, my = 0
 

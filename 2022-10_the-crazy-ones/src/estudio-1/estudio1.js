@@ -12,7 +12,7 @@ class Estudio1 {
     this.height = graphics.height
 
     this.index = Estudio1.counter++
-    let colors = ['#70d6ff', '#ff70a6', '#ff9770', '#ffd670', '#89ED8D']
+    let colors = ['#323232', '#FF5B65', '#FFA24B', '#FCDF5F', '#49D8EE', '#F5EFE7']
     this.color = colors[(this.index + 3) % colors.length]
     this.graphics.textFont(font)
 

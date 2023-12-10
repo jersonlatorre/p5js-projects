@@ -5,7 +5,7 @@ let buffer
 let sketch
 let time = 0
 let shaderEffect, shaderCanvas
-let colors = ['#70d6ff', '#ff70a6', '#ff9770', '#ffd670', '#89ED8D']
+let colors = ['#FF5B65', '#FFA24B', '#FCDF5F', '#49D8EE', '#F5EFE7']
 let pixelDensity = 2
 
 function preload() {

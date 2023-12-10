@@ -19,6 +19,7 @@ class Post {
     fill(this.color)
     push()
     translate(this.position.x, this.position.y)
+    noStroke()
     rect(0, 0, this.w * this.scale, this.h * this.scale)
     pop()
   }

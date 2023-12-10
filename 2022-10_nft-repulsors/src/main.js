@@ -1,7 +1,7 @@
 let windowManager
 let graphics
 let drawer
-let colors = ['#70d6ff', '#ff70a6', '#ff9770', '#ffd670', '#89ED8D']
+let colors = ['#323232', '#FF5B65', '#FFA24B', '#FCDF5F', '#49D8EE', '#F5EFE7']
 let params = {}
 let size
 

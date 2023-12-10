@@ -25,7 +25,9 @@ function setup() {
 function draw() {
   background('black')
 
-  tracer.addPoint(createVector(mouseX, mouseY))
+  // if (mouseIsPressed) {
+    tracer.addPoint(createVector(mouseX, mouseY))
+  // }
 
   tracer.draw()
   image(cursorImg, mouseX - 5, mouseY - 5)
