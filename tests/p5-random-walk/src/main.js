@@ -3,7 +3,7 @@ let aux
 
 let particles = []
 let SIZE = 200
-let MIN_AMPLITUDE = 0.01
+let MIN_AMPLITUDE = 0.005
 let drawer
 
 function setup() {
@@ -62,7 +62,7 @@ class Drawer {
 
   calculateRandomPositions() {
     this.positions = []
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       let x = random(-SIZE / 2, SIZE / 2)
       let y = random(-SIZE / 2, SIZE / 2)
       let size = random(20, 60)
@@ -76,7 +76,7 @@ class Drawer {
     g.fill(0)
 
     
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < this.positions.length; i++) {
       g.rectMode(CENTER)
       let x = this.positions[i][0]
       let y = this.positions[i][1]

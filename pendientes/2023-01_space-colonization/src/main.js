@@ -27,7 +27,7 @@ class Branch {
     this.direction = direction.copy()
     this.originDirection = direction.copy()
     this.count = 0
-    this.setpSize = 1.5
+    this.stepSize = 0.5
     this.thickness = 0
   }
 
@@ -37,7 +37,7 @@ class Branch {
   }
 
   next() {
-    let direction = p5.Vector.mult(this.direction, this.setpSize)
+    let direction = p5.Vector.mult(this.direction, this.stepSize)
     // let randomVector = p5.Vector.random2D()
     // direction.add(randomVector.mult(0.0))
     let nextPosition = p5.Vector.add(this.position, direction)

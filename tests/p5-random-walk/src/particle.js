@@ -8,7 +8,7 @@ class Particle {
     this.color
     this.updateOffsets()
     this.eq = 0
-    this.time = random(100)
+    this.time = random(0)
   }
 
   move() {
@@ -20,11 +20,11 @@ class Particle {
     // set the amplitude of the move -> proportional to the vibration
 
     this.color = color(0, 0, 0)
-    this.stochasticAmplitude = 0.9 * this.eq
+    this.stochasticAmplitude = 0.06 * this.eq
 
     if (this.stochasticAmplitude <= MIN_AMPLITUDE) this.stochasticAmplitude = MIN_AMPLITUDE
 
-    this.time += 0.1
+    this.time += 0.001
     // perform one random walk
     // this.x = this.initialX + 0.1 * noise(this.time, 0)
     // this.y = this.initialY + 0.1 * noise(0, this.time)
@@ -49,6 +49,6 @@ class Particle {
   draw() {
     noStroke()
     fill(0)
-    circle(this.xOff, this.yOff, 2)
+    circle(this.xOff, this.yOff, 5)
   }
 }

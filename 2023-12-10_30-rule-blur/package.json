@@ -1,0 +1,20 @@
+{
+  "name": "vite-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.0.6"
+  },
+  "dependencies": {
+    "p5": "^1.9.0",
+    "p5-easy": "^1.0.1",
+    "simplex-noise": "^4.0.1"
+  }
+}
