@@ -4,7 +4,7 @@ let NUM_DOTS = 2000
 
 let angle = 0
 let simplex = new SimplexNoise()
-let marginX = 0
+let marginX, marginY = 0
 
 let fireX, fireY, waterX, waterY
 

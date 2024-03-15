@@ -6,23 +6,27 @@ let lerpedGlobalScale = 1
 let lerpedGlobalX = 1
 let lerpedGlobalY = 1
 
-let colors = ['#FF5B65', '#FFA24B', '#FCDF5F', '#49D8EE', '#F5EFE7']
+let colors = ['#FF004D', '#FFA300', '#FFEC27', '#29ADFF', ' #FFF1E8']
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
-  setAttributes('antialias', true)
-  setAttributes('depth', true)
 
   createButton('+')
     .position(10, 10)
     .size(50, 50)
     .mousePressed(() => {
-      posts.push(new Post(random(-100, 100), random(-100, 100), random(colors), random(0.3, 3)))
-    })
+      // Ajusta la posición del nuevo post basándose en la escala y posición actual
+      let screenCenterX = width / 2
+      let screenCenterY = height / 2
 
-  for (let i = 0; i < 10; i++) {
-    // posts.push(new Post(random(-100, 100), random(-100, 100), random(colors), random(0.3, 3)))
-  }
+      // Transforma las coordenadas del centro de la pantalla al espacio del canvas
+      let canvasCenterX = (screenCenterX - lerpedGlobalX - width / 2) / lerpedGlobalScale
+      let canvasCenterY = (screenCenterY - lerpedGlobalY - height / 2) / lerpedGlobalScale
+      canvasCenterX += random(-10, 10)
+      canvasCenterY += random(-10, 10)
+      let newPost = new Post(canvasCenterX, canvasCenterY, random(colors), random(0.3, 3))
+      posts.push(newPost)
+    })
 
   colorMode(HSB, 100, 100, 100)
   rectMode(CENTER, CENTER)

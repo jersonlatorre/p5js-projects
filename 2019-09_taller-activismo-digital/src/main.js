@@ -121,13 +121,4 @@ function mousePressed() {
 			pixel.startTransform()
 		})
 	}
-
-	// color del fondo
-	// tColor = 0
-	// prevColor = colors[currentFrame]
-	// if (currentFrame + 1 == images.length) {
-	// 	nextColor = colors[0]
-	// } else {
-	// 	nextColor = colors[currentFrame + 1]
-	// }
 }
