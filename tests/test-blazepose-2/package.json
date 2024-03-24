@@ -13,7 +13,6 @@
     "@tensorflow-models/pose-detection": "^2.1.3",
     "@tensorflow/tfjs-backend-webgl": "^4.17.0",
     "@tensorflow/tfjs-core": "^4.17.0",
-    "hull.js": "^1.0.5",
     "p5-easy": "^1.0.4"
   },
   "devDependencies": {

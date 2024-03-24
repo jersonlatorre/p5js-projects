@@ -8,7 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "p5-easy": "^1.0.4"
+    "p5-easy": "^1.0.7"
   },
   "devDependencies": {
     "vite": "^5.0.10"

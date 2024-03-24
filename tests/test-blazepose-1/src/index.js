@@ -58,30 +58,7 @@ p.draw = async () => {
 
   if (!detector) return
   const poses = await detector.estimatePoses(webcam.elt, estimationConfig)
-  poses.forEach((estimate) => {
-    bodySegmentation
-      .toBinaryMask(
-        estimate.segmentation,
-        { r: 0, g: 0, b: 0, a: 0 },
-        { r: 255, g: 255, b: 255, a: 255 },
-        false,
-        0.5
-      )
-      .then((mask) => {
-        if (mask) {
-          if (mask.data.length > 0) {
-            maskCanvas.clear()
-            maskCanvas.loadPixels()
-            maskCanvas.pixels.set(mask.data)
-            maskCanvas.updatePixels()
-          }
-        }
-      })
-
-    previewCanvas.image(maskCanvas, 640 / 2, 480 / 2, 640, 480)
-    drawBodyLines(estimate.keypoints)
-  })
-
+   
   p.fill(0, 0.05)
   p.noStroke()
   p.rect(0, 0, 640, 640)

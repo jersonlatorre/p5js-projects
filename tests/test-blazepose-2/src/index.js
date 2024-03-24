@@ -27,7 +27,10 @@ p.draw = async () => {
   p.circle(p1.x, p1.y, 100)
   p.circle(p2.x, p2.y, 100)
 
-  let { mask, keypoints } = await poseAnalyzer?.getPose(webcam)
+  let response = await poseAnalyzer?.getPose(webcam)
+  if (!response) return
+
+  let { mask, keypoints } = response
   if (!mask || !keypoints) return
 
   previewCanvas.background('black')

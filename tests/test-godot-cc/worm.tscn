@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxmh6sty8qmer"]
-
-[ext_resource type="Script" path="res://worm.gd" id="1_bdwvs"]
-
-[node name="Worm" type="Node3D"]
-script = ExtResource("1_bdwvs")
